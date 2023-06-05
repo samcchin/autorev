@@ -10,6 +10,75 @@ function Nav() {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            {/* Manufacturer */}
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+              <NavLink className="nav-link" aria-current="page" to="/manufacturers/">Manufacturers</NavLink>
+            </li>
+            <li className="nav-item">
+                <NavLink className="nav-link" to="/manufacturers/new">Create a Manufacturer</NavLink>
+            </li>
+
+            {/* Models */}
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+              <NavLink className="nav-link" aria-current="page" to="/models">Models</NavLink>
+            </li>
+            <li className="nav-item">
+                <NavLink className="nav-link" to="models/new">Create a Model</NavLink>
+            </li>
+
+            {/* Automobiles */}
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+              <NavLink className="nav-link" aria-current="page" to="/automobiles">Automobiles</NavLink>
+            </li>
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+                <NavLink className="nav-link" to="/automobiles/new">Create an automobile</NavLink>
+            </li>
+
+            {/* Salespeople */}
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+              <NavLink className="nav-link" aria-current="page" to="/salespeople">Salespeople</NavLink>
+            </li>
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+                <NavLink className="nav-link" to="/salespeople/new">Add a Salesperson</NavLink>
+            </li>
+
+            {/* Customers */}
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+              <NavLink className="nav-link" aria-current="page" to="/customers">Customers</NavLink>
+            </li>
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+                <NavLink className="nav-link" to="/customers/new">Add a Customer</NavLink>
+            </li>
+
+            {/* Sales */}
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+              <NavLink className="nav-link" aria-current="page" to="/sales">Sales</NavLink>
+            </li>
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+                <NavLink className="nav-link" to="/sales/new">Add a Sale</NavLink>
+            </li>
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+                <NavLink className="nav-link" to="/sales/history">Salesperson History</NavLink>
+            </li>
+
+            {/* Technicians */}
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+              <NavLink className="nav-link" aria-current="page" to="/technicians">Technicians</NavLink>
+            </li>
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+                <NavLink className="nav-link" to="/technicians/new">Add a Technician</NavLink>
+            </li>
+
+            {/* Appointments */}
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+              <NavLink className="nav-link" aria-current="page" to="/appointments">Service Appointments</NavLink>
+            </li>
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+                <NavLink className="nav-link" to="/appointments/new">Create a Service Appointment</NavLink>
+            </li>
+            <li className="navbar-nav me-auto mb-2 mb-lg-0">
+                <NavLink className="nav-link" to="/appointments/history">Service History</NavLink>
+            </li>
           </ul>
         </div>
       </div>

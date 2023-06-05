@@ -1,5 +1,10 @@
 function AutomobileList(){
-    <p>This is the AutomobileList page</p>
+    return (
+        <>
+        <p>This is the AutomobileList page</p>
+        </>
+        )
+
 }
 
 export default AutomobileList

@@ -58,7 +58,7 @@ function Nav() {
                 <NavLink className="nav-link" to="/sales/new">Add a Sale</NavLink>
             </li>
             <li className="navbar-nav me-auto mb-2 mb-lg-0">
-                <NavLink className="nav-link" to="/sales/history">Salesperson History</NavLink>
+                <NavLink className="nav-link" to="/sales/history">Sales History</NavLink>
             </li>
 
             {/* Technicians */}

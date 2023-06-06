@@ -127,13 +127,9 @@ def api_show_appointment(request, pk):
         )
     elif request.method == "PUT":
         try:
-            content = json.loads(request.body)
+            body = json.loads(request.body)
+            Appointment.objects.filter(id=pk).update(**body)
             appointment = Appointment.objects.get(id=pk)
-            props = ["status"]
-            for prop in props:
-                if prop in content:
-                    setattr(appointment, prop, content[prop])
-            appointment.save()
             return JsonResponse(
                 appointment,
                 encoder=AppointmentEncoder,
@@ -171,3 +167,49 @@ def api_show_service_history(request, vin):
         {"appointments": appointments},
         encoder=AppointmentEncoder
     )
+
+
+# Updates status to canceled
+@require_http_methods(["PUT"])
+def api_cancel_appointment(request, pk):
+    if request.method == "PUT":
+        try:
+            content = json.loads(request.body)
+            appointment = Appointment.objects.get(id=pk)
+            if "status" in content:
+                status = content["status"]
+                if status == "canceled":
+                    appointment.status = "canceled"
+                appointment.save()
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentEncoder,
+                safe=False
+            )
+        except Appointment.DoesNotExist:
+            response = JsonResponse({"message": "Appointment does not exist"})
+            response.status_code = 404
+            return response
+
+
+# Updates status to finished
+@require_http_methods(["PUT"])
+def api_finish_appointment(request, pk):
+    if request.method == "PUT":
+        try:
+            content = json.loads(request.body)
+            appointment = Appointment.objects.get(id=pk)
+            if "status" in content:
+                status = content["status"]
+                if status == "finished":
+                    appointment.status = "finished"
+                appointment.save()
+            return JsonResponse(
+                appointment,
+                encoder=AppointmentEncoder,
+                safe=False
+            )
+        except Appointment.DoesNotExist:
+            response = JsonResponse({"message": "Appointment does not exist"})
+            response.status_code = 404
+            return response

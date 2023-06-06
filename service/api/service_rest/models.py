@@ -26,6 +26,12 @@ class Technician(models.Model):
 
 
 class Appointment(models.Model):
+    STATUS_CHOICES = (
+        ("canceled", "canceled"),
+        ("created", "created"),
+        ("finished", "finished"),
+    )
+
     date_time = models.DateTimeField()
     reason = models.TextField()
     status = models.CharField(max_length=100)
@@ -37,8 +43,10 @@ class Appointment(models.Model):
         on_delete=models.CASCADE
     )
     vip_status = models.CharField(max_length=100)
-    status = models.CharField(max_length=100)
-
+    status = models.CharField(
+        max_length=100,
+        choices=STATUS_CHOICES,
+        default="created")
 
     def get_api_url(self):
         return reverse("api_show_appointment", kwargs={"pk": self.pk})

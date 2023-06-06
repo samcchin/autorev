@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function SalesForm({getSales, getAutomobiles, getCustomers, getSalespeople}) {
+function SalesForm({ getSales, getAutomobiles, getCustomers, getSalespeople }) {
     const [automobile, setAutomobile] = useState('');
     const [salesperson, setSalesperson] = useState('');
     const [customer, setCustomer] = useState('');
@@ -10,38 +10,6 @@ function SalesForm({getSales, getAutomobiles, getCustomers, getSalespeople}) {
     const [customers, setCustomers] = useState([]);
 
 
-    async function getAutomobiles() {
-        const url = 'http://localhost:8100/api/automobiles/';
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            setAutomobiles(data.automobiles);
-        }
-    }
-
-
-    async function getCustomers() {
-        const url = 'http://localhost:8090/api/customers/';
-        const response = await fetch(url);
-        if (response.ok) {
-            const data = await response.json();
-            setCustomers(data.customers);
-        }
-    }
-
-
-
-
-    async function getSalespeople() {
-        const url = 'http://localhost:8090/api/salespeople/';
-
-        const response = await fetch(url);
-
-        if (response.ok) {
-        const data = await response.json();
-        setSalespeople(data.salespeople);
-        }
-    }
 
     useEffect(() => {
         getCustomers();
@@ -55,10 +23,10 @@ function SalesForm({getSales, getAutomobiles, getCustomers, getSalespeople}) {
             automobile,
             price,
             customer,
-            salesperson: salesperson,
+            salesperson_id: salesperson,
         };
 
-        const url = 'http://localhost:8090/api/sales/';
+        const url = 'http://sales-api:8090/api/sales/';
         const fetchConfig = {
             method: "post",
             body: JSON.stringify(data),

@@ -35,6 +35,7 @@ function AutomobileForm(props){
         const response = await fetch(automobileUrl, fetchConfig);
         if (response.ok){
             const newAutomobile = await response.json();
+            console.log(newAutomobile)
             setColor('')
             setYear('')
             setVin('')

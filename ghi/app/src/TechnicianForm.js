@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 function TechnicianForm(models){
     const [firstName, setFirstName] = useState('');
@@ -32,10 +32,6 @@ function TechnicianForm(models){
           window.location.reload()
         }
     }
-
-    // useEffect(() => {
-    //     fetchData();
-    // }, []);
 
     const handleFirstNameChange = (event) => {
         const value = event.target.value;

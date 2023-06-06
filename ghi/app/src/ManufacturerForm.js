@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function ManufacturerForm(manufacturers){
+function ManufacturerForm(){
     const [manufacturerName, setManufacturerName] = useState([])
 
     const handleSubmit = async (event)=>{
@@ -22,6 +22,7 @@ function ManufacturerForm(manufacturers){
         if (response.ok){
             const newManufacturer = await response.json();
             console.log(newManufacturer);
+
             setManufacturerName('');
             window.location.reload()
         }

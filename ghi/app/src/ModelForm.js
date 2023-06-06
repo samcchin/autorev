@@ -76,7 +76,7 @@ function ModelForm(models){
                   placeholder="Model name"
                   required value ={name}
                   type="text" name="model_name" id="model_name" className="form-control"/>
-                  <label htmlFor="model_name name">Model Name</label>
+                  <label htmlFor="model_name">Model Name</label>
                 </div>
                 <div className="form-floating mb-3">
                   <input

@@ -4,7 +4,7 @@ function CustomersList({customers}) {
     return(
         <div>
             <h1>Customers</h1>
-            <table className='table table-striped'>
+            <table className='table table-striped table-hover'>
                 <thead>
                     <tr>
                         <th>First Name</th>

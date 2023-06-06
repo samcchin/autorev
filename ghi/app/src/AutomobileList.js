@@ -5,7 +5,7 @@ function AutomobileList(props){
     return(
         <>
             <h1>Automobiles</h1>
-            <table className="table table-striped">
+            <table className="table table-striped table-hover">
                 <thead>
                     <tr>
                         <th>VIN</th>

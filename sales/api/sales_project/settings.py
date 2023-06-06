@@ -28,7 +28,7 @@ DEBUG = True
 
 INSTALLED_APPS = [
 
-    'sales_api.apps.SalesRestConfig',
+    'sales_rest.apps.SalesRestConfig',
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',

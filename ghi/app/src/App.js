@@ -125,11 +125,11 @@ function App(props) {
     getManufacturers();
     getModels();
     getAutomobiles();
-    getAppointments()
-    getTechnicians();
-    getSales();
     getCustomers();
     getSalespeople();
+    getSales();
+    getTechnicians();
+    getAppointments();
   }, []);
 
 

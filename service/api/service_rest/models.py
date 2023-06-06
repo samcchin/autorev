@@ -10,7 +10,7 @@ class AutomobileVO(models.Model):
     year = models.PositiveSmallIntegerField(default=False)
 
     def get_api_url(self):
-        return reverse("api_show_automobile", kwargs={"pk": self.pk})
+        return reverse("api_show_automobile", kwargs={"pk": self.vin})
 
 
 class Technician(models.Model):

@@ -17,6 +17,7 @@ class AutomobileVOEncoder(ModelEncoder):
         "id"
     ]
 
+
 class TechnicianEncoder(ModelEncoder):
     model = Technician
     properties = [
@@ -25,6 +26,7 @@ class TechnicianEncoder(ModelEncoder):
         "last_name",
         "employee_id"
     ]
+
 
 class AppointmentEncoder(ModelEncoder):
     model = Appointment
@@ -44,16 +46,6 @@ class AppointmentEncoder(ModelEncoder):
         "technician": TechnicianEncoder(),
     }
 
-# Create your views here.
-
-# AutomobileVO
-# class AutomobileVO(models.Model):
-#     import_href = models.CharField(max_length=200, unique=True)
-#     vin = models.CharField(max_length=17, unique=True)
-#     sold = models.BooleanField(default=False)
-
-#     def get_api_url(self):
-#         return reverse("api_show_automobile", kwargs={"pk": self.pk})
 
 # GET & POST Technicians (Create & List Technicians)
 @require_http_methods(["GET", "POST"])
@@ -106,7 +98,6 @@ def api_show_technician(request, pk):
         )
 
 
-
 # GET & POST Appointments (Create & List Appointments)
 @require_http_methods(["GET", "POST"])
 def api_list_appointments(request):
@@ -136,9 +127,13 @@ def api_show_appointment(request, pk):
         )
     elif request.method == "PUT":
         try:
-            body = json.loads(request.body)
-            Appointment.objects.filter(id=pk).update(**body)
+            content = json.loads(request.body)
             appointment = Appointment.objects.get(id=pk)
+            props = ["status"]
+            for prop in props:
+                if prop in content:
+                    setattr(appointment, prop, content[prop])
+            appointment.save()
             return JsonResponse(
                 appointment,
                 encoder=AppointmentEncoder,
@@ -156,3 +151,23 @@ def api_show_appointment(request, pk):
             encoder=AppointmentEncoder,
             safe=False
         )
+
+
+# Get list of AutomobileVOs
+@require_http_methods(["GET"])
+def api_list_automobileVO(request):
+    automobiles = AutomobileVO.objects.all()
+    return JsonResponse(
+        {"automobiles": automobiles},
+        encoder=AutomobileVOEncoder
+    )
+
+
+# Get service history - list of appointments (Based on VIN)
+@require_http_methods(["GET"])
+def api_show_service_history(request, vin):
+    appointments = Appointment.objects.filter(id=vin)
+    return JsonResponse(
+        {"appointments": appointments},
+        encoder=AppointmentEncoder
+    )

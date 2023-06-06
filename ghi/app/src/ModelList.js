@@ -20,7 +20,6 @@ function ModelList(props){
           </thead>
           <tbody>
             {props.models.map((model) => {
-              console.log(props.models)
               return (
                 <tr key={model.id}>
                   <td>{model.name}</td>

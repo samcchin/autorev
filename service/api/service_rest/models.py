@@ -1,7 +1,18 @@
 from django.db import models
 from django.urls import reverse
 
+
 # Create your models here.
+class AutomobileVO(models.Model):
+    vin = models.CharField(max_length=17, unique=True)
+    sold = models.BooleanField(default=False)
+    color = models.CharField(max_length=50, default=False)
+    year = models.PositiveSmallIntegerField(default=False)
+
+    def get_api_url(self):
+        return reverse("api_show_automobile", kwargs={"pk": self.pk})
+
+
 class Technician(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
@@ -12,15 +23,6 @@ class Technician(models.Model):
 
     def get_api_url(self):
         return reverse("api_show_technician", kwargs={"pk": self.pk})
-
-
-class AutomobileVO(models.Model):
-    import_href = models.CharField(max_length=200, unique=True)
-    vin = models.CharField(max_length=17, unique=True)
-    sold = models.BooleanField(default=False)
-
-    def get_api_url(self):
-        return reverse("api_show_automobile", kwargs={"pk": self.pk})
 
 
 class Appointment(models.Model):
@@ -34,7 +36,9 @@ class Appointment(models.Model):
         related_name="appointments",
         on_delete=models.CASCADE
     )
-    vip_status = models.BooleanField(default=False)
+    vip_status = models.CharField(max_length=100)
+    status = models.CharField(max_length=100)
+
 
     def get_api_url(self):
         return reverse("api_show_appointment", kwargs={"pk": self.pk})

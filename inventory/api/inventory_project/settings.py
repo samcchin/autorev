@@ -30,7 +30,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
-    "inventory_rest.apps.InventoryRestConfig",
+    "inventory_api.apps.InventoryRestConfig",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -62,8 +62,9 @@ CSRF_TRUSTED_ORIGINS = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8100",
-    "http://localhost:8090",
+    "http://localhost:8000",
     "http://localhost:8080",
+    "http://localhost:8090",
 ]
 CORS_ALLOW_CREDENTIALS = True
 

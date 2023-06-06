@@ -7,8 +7,45 @@ function AutomobileForm(models){
     const [vin, setVin] = useState('')
     const [model, setModel ] = useState('')
 
-    const fetchData = async () => {
-        const url=''
+function AutomobileForm({getAutomobiles, getModels}){
+    const [models, setModels] = useState([]);
+    const [model, setModel] = useState('');
+    const [vin, setVin] = useState('');
+    const [color, setColor] = useState('');
+    const [year, setYear] = useState('');
+
+    useEffect(() => {
+        getModels();
+    }, []);
+
+
+    async function handleSubmit(event){
+        event.preventDefault();
+        const data = {
+            color,
+            year,
+            model,
+            vin,
+        };
+
+        const url = "http://localhost:8100/api/automobiles/";
+        const fetchConfig = {
+            method: "post",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        const response = await fetch(url, fetchConfig);
+        if(response.ok){
+            const newAutomobile = await response.json();
+            console.log("new automobile: ", newAutomobile);
+            getAutomobiles();
+            setColor("");
+            setYear("");
+            setModel("");
+            setVin("");
+        }
     }
 
 }

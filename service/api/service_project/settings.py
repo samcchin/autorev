@@ -51,13 +51,15 @@ MIDDLEWARE = [
 ]
 
 ALLOWED_HOSTS = [
+    "http://localhost:3000",
     "localhost",
-    "project-beta-inventory-api-1",
+    "react"
     "inventory-api",
 ]
 
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:3000",
+    "http://localhost:8000",
     "http://localhost:8080",
     "http://localhost:8090",
     "http://localhost:8100",

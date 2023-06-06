@@ -1,7 +1,111 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-function CustomerForm(){
-    <p>This is the CustomerForm page</p>
+function CustomerForm({getCustomers}) {
+    const [first_name, setLastName] = useState('');
+    const [last_name, setFirstName] = useState('');
+    const [address, setAddress] = useState('');
+    const [phone_number, setPhoneNumber] = useState('');
+
+    async function handleSubmit(event) {
+        event.preventDefault();
+        const data = {
+            first_name,
+            last_name,
+            address,
+            phone_number,
+        };
+        const url = 'http://localhost:8090/api/customers/';
+        const fetchConfig = {
+            method: "post",
+            body: JSON.stringify(data),
+            headers: {
+            'Content-Type': 'application/json',
+            },
+        };
+        const response = await fetch(url, fetchConfig);
+        if (response.ok) {
+            const newCustomer = await response.json();
+            console.log(newCustomer);
+            getCustomers();
+            setLastName('');
+            setFirstName('');
+            setAddress('');
+            setPhoneNumber('');
+        }
+    }
+    
+    function handleLastNameChange(event) {
+        const value = event.target.value;
+        setLastName(value);
+    }
+
+    function handleFirstNameChange(event) {
+        const value = event.target.value;
+        setFirstName(value);
+    }
+
+    function handleAddressChange(event) {
+        const value = event.target.value;
+        setAddress(value);
+    }
+
+    function handlePhoneNumberChange(event) {
+        const value = event.target.value;
+        setPhoneNumber(value);
+    }
+
+    return  (
+        <div className="row">
+            <div className="offset col-6">
+                <div className="shadow p-4 mt-4">
+                    <h1>Add a Customer</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div className ="form-floating mb-3">
+                            <input onChange={handleFirstNameChange}
+                            value ={first_name}
+                            placeholder='Customer First Name'
+                            required type="text"
+                            name="first_name"
+                            id="first_name"
+                            className="form-control" />
+                            <label htmlFor="name"> First name... </label>
+                        </div>
+                        <div className ="form-floating mb-3">
+                            <input onChange={handleLastNameChange}
+                            value ={last_name}
+                            placeholder='Customer Last Name'
+                            required type="text"
+                            name="last_name"
+                            id="last_name"
+                            className="form-control" />
+                            <label htmlFor="name"> Last name... </label>
+                        </div>
+                        <div className ="form-floating mb-3">
+                            <input onChange={handleAddressChange}
+                                placeholder="Customer Address"
+                                required type="text"
+                                name="address"
+                                id="address"
+                                className="form-control"
+                            />
+                            <label htmlFor="address"> Address... </label>
+                        </div>
+                        <div className ="form-floating mb-3">
+                            <input onChange={handlePhoneNumberChange}
+                                placeholder="Customer Phone Number"
+                                required type="tel"
+                                name="phone_number"
+                                id="phone_number"
+                                className="form-control"
+                            />
+                            <label htmlFor="phone_number"> Phone Number (XXX)-XXX-XXXX </label>
+                        </div>
+                        <button type="submit" className="btn btn-outline-primary">Create</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    )
 }
 
-export default CustomerForm
+export default CustomerForm;

@@ -60,7 +60,7 @@ function App(props) {
     const response = await fetch(url);
     if (response.ok){
       const data = await response.json();
-      setAutomobiles(data.automobiles);
+      setAutomobiles(data.autos);
     } else {
       console.error(response);
     }
@@ -148,7 +148,7 @@ function App(props) {
             <Route path="new" element={<ModelForm getModels={getModels}/>}/>
           </Route>
           <Route path="automobiles">
-            <Route index element={<AutomobileList automobiles={automobiles}/>}/>
+            <Route index element={<AutomobileList automobiles={automobiles} getAutomobiles={getAutomobiles}/>}/>
             <Route path="new" element={<AutomobileForm getAutomobiles={getAutomobiles} getModels={getModels} />}/>
           </Route>
           <Route path="salespeople">

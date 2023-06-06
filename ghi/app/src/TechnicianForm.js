@@ -29,6 +29,7 @@ function TechnicianForm(models){
           setFirstName('');
           setLastName('');
           setEmployeeId('');
+          window.location.reload()
         }
     }
 

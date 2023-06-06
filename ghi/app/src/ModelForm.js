@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function ModelForm(models){
+function ModelForm(props){
     const [manufacturers, setManufacturers] = useState([])
     const [name, setName] = useState('');
     const [pictureUrl, setPictureUrl] = useState('');
@@ -18,7 +18,6 @@ function ModelForm(models){
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
-        console.log(data)
         data.name = name;
         data.picture_url = pictureUrl;
         data.manufacturer = manufacturer;
@@ -32,13 +31,13 @@ function ModelForm(models){
           },
         };
         const response = await fetch(modelUrl, fetchConfig);
-        console.log(response)
         if (response.ok) {
           const newModel = await response.json();
           console.log(newModel)
           setName('');
           setPictureUrl('');
           setManufacturer('');
+          props.getModels()
         }
     }
 
@@ -97,7 +96,7 @@ function ModelForm(models){
                     <option value="">Choose a manufacturer</option>
                     {manufacturers.map(manufacturer=>{
                       return (
-                          <option key={manufacturer.id} value={manufacturer.href}>
+                          <option key={manufacturer.id} value={manufacturer.id}>
                             {manufacturer.name}
                           </option>
                       )

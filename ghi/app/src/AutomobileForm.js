@@ -97,7 +97,7 @@ function AutomobileForm(props){
                   type="text" name="vin" id="vin" className="form-control"/>
                   <label htmlFor="vin">VIN</label>
                 </div>
-                <div className="mb-3">
+                <div className=" mb-3">
                   <select
                     onChange={handleModelChange}
                     required

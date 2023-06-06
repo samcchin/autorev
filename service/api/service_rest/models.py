@@ -29,7 +29,7 @@ class Appointment(models.Model):
     STATUS_CHOICES = (
         ("canceled", "canceled"),
         ("created", "created"),
-        ("finished", "finished"),
+        ("completed", "completed"),
     )
 
     date_time = models.DateTimeField()

@@ -41,7 +41,6 @@ class Appointment(models.Model):
     def get_api_url(self):
         return reverse("api_show_appointment", kwargs={"pk": self.pk})
 
-    # Check if the VIN exists in the inventory to determine VIP status
     def update_vip_status(self, *args, **kwargs):
         if AutomobileVO.objects.filter(vin=self.vin).exists():
             self.vip_status = True

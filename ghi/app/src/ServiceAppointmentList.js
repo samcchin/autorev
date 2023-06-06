@@ -36,7 +36,7 @@ function ServiceAppointmentList({appointments}){
               return (
                 <tr key={appointment.id}>
                   <td>{appointment.vin}</td>
-                  <td>{appointment.vip_status.toString()}</td>
+                  <td>{appointment.vip_status ? "Yes":"No"}</td>
                   <td>{appointment.customer}</td>
                   <td>{appointment.date_time}</td>
                   <td>{`${appointment.technician.first_name} ${appointment.technician.last_name}`}</td>

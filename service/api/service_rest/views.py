@@ -107,8 +107,17 @@ def api_list_appointments(request):
             {"appointments": appointments},
             encoder=AppointmentEncoder
         )
-    else:  # POST / Create a technician
+    else:  # POST / Create an appointment
         content = json.loads(request.body)
+        try:
+            technician_id = content["technician"]
+            technician = Technician.objects.get(employee_id=technician_id)
+            content["technician"] = technician
+        except Technician.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid technician"},
+                status=400,
+            )
         appointment = Appointment.objects.create(**content)
         return JsonResponse(
             appointment,

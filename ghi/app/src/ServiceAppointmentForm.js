@@ -39,6 +39,7 @@ function ServiceAppointmentForm(){
             },
         }
         const response = await fetch(appointmentUrl, fetchConfig);
+        console.log(response)
         if (response.ok){
             const newAppointment = await response.json();
             console.log(newAppointment)

@@ -26,12 +26,6 @@ class Technician(models.Model):
 
 
 class Appointment(models.Model):
-    STATUS_CHOICES = (
-        ("canceled", "canceled"),
-        ("created", "created"),
-        ("completed", "completed"),
-    )
-
     date_time = models.DateTimeField()
     reason = models.TextField()
     status = models.CharField(max_length=100)
@@ -42,11 +36,13 @@ class Appointment(models.Model):
         related_name="appointments",
         on_delete=models.CASCADE
     )
-    vip_status = models.CharField(max_length=100)
-    status = models.CharField(
-        max_length=100,
-        choices=STATUS_CHOICES,
-        default="created")
+    vip_status = models.BooleanField(default=False)
 
     def get_api_url(self):
         return reverse("api_show_appointment", kwargs={"pk": self.pk})
+
+    # Check if the VIN exists in the inventory to determine VIP status
+    def update_vip_status(self, *args, **kwargs):
+        if AutomobileVO.objects.filter(vin=self.vin).exists():
+            self.vip_status = True
+        super().save(*args, **kwargs)

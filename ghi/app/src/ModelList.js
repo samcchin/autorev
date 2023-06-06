@@ -1,8 +1,4 @@
-import React, {useEffect, useState} from "react"
-
 function ModelList(props){
-    const [models, setModels] = useState([]);
-
     if (!props.models || !Array.isArray(props.models)){
         return null;
     }
@@ -10,6 +6,7 @@ function ModelList(props){
 
     return (
       <>
+        <h1>Vehicle Models</h1>
         <table className="table table-striped table-hover">
           <thead>
             <tr>

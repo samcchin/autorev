@@ -1,7 +1,9 @@
-function AutomobileList({automobiles}){
-    console.log("automobiles in AutomobileList:", automobiles);
+function AutomobileList(props){
+    if (!props.automobiles || !Array.isArray(props.automobiles)){
+        return null;
+    }
     return(
-        <div>
+        <>
             <h1>Automobiles</h1>
             <table className="table table-striped">
                 <thead>
@@ -15,7 +17,8 @@ function AutomobileList({automobiles}){
                     </tr>
                 </thead>
                 <tbody>
-                    {automobiles?.map(automobile => {
+                    {props.automobiles.map((automobile) => {
+                        console.log(props.automobiles)
                         return(
                             <tr key={ automobile.id }>
                                 <td>{ automobile.vin }</td>
@@ -29,7 +32,7 @@ function AutomobileList({automobiles}){
                     })}
                 </tbody>
             </table>
-        </div>
+        </>
     );
 }
 

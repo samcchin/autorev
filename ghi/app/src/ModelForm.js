@@ -94,7 +94,7 @@ function ModelForm(models){
                     name="manufacturer"
                     id="manufacturer"
                     className="form-select">
-                    <option value="">Choose a location</option>
+                    <option value="">Choose a manufacturer</option>
                     {manufacturers.map(manufacturer=>{
                       return (
                           <option key={manufacturer.id} value={manufacturer.href}>

@@ -20,7 +20,7 @@ function ModelForm(props){
         const data = {};
         data.name = name;
         data.picture_url = pictureUrl;
-        data.manufacturer = manufacturer;
+        data.manufacturer_id = manufacturer;
 
         const modelUrl = 'http://localhost:8100/api/models/';
         const fetchConfig = {
@@ -37,7 +37,7 @@ function ModelForm(props){
           setName('');
           setPictureUrl('');
           setManufacturer('');
-          props.getModels()
+          window.location.reload()
         }
     }
 

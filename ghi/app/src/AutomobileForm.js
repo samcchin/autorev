@@ -22,7 +22,7 @@ function AutomobileForm(props){
         data.color = color;
         data.year = year;
         data.vin = vin;
-        data.model = model;
+        data.model_id = model;
 
         const automobileUrl = 'http://localhost:8100/api/automobiles/'
         const fetchConfig = {
@@ -35,11 +35,11 @@ function AutomobileForm(props){
         const response = await fetch(automobileUrl, fetchConfig);
         if (response.ok){
             const newAutomobile = await response.json();
-            console.log(newAutomobile)
             setColor('')
             setYear('')
             setVin('')
             setModel('')
+            window.location.reload()
         }
     }
     useEffect(() => {
@@ -108,7 +108,7 @@ function AutomobileForm(props){
                     <option value="">Choose a model</option>
                     {models.map(model=>{
                       return (
-                          <option key={model.id} value={model.href}>
+                          <option key={model.id} value={model.id}>
                             {model.name}
                           </option>
                       )

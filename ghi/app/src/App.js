@@ -149,7 +149,7 @@ function App(props) {
           </Route>
           <Route path="automobiles">
             <Route index element={<AutomobileList automobiles={automobiles}/>}/>
-            <Route path="new" element={<AutomobileForm getAutomobiles={getAutomobiles} />}/>
+            <Route path="new" element={<AutomobileForm getAutomobiles={getAutomobiles} getModels={getModels} />}/>
           </Route>
           <Route path="salespeople">
             <Route index element={<SalespeopleList salespeople={salespeople} />}/>

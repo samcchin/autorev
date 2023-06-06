@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 
-function AutomobileForm({getAutomobiles}){
+function AutomobileForm({getAutomobiles, getModels}){
     const [models, setModels] = useState([]);
     const [model, setModel] = useState('');
     const [vin, setVin] = useState('');
@@ -9,14 +9,6 @@ function AutomobileForm({getAutomobiles}){
     const [year, setYear] = useState('');
 
     useEffect(() => {
-        async function getModels() {
-            const url = 'http://localhost:8100/api/automobiles/';
-            const response = await fetch(url);
-            if (response.ok) {
-                const data = await response.json();
-                setModels(data.models);
-            }
-        }
         getModels();
     }, []);
 

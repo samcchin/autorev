@@ -32,7 +32,16 @@ function App(props) {
   const [customers, setCustomers] = useState([]);
   const [salespeople, setSalespeople] = useState([]);
 
-
+  async function getManufacturers(){
+    const url = 'http://localhost:8100/api/manufacturers/'
+    const response = await fetch(url);
+    if (response.ok){
+      const data = await response.json();
+      setManufacturers(data.manufacturers);
+    } else {
+      console.error(response);
+    }
+  }
 
   async function getModels(){
     const url = 'http://localhost:8100/api/models/'
@@ -50,7 +59,7 @@ function App(props) {
     const response = await fetch(url);
     if (response.ok){
       const data = await response.json();
-      setAutomobiles(data.autos);
+      setAutomobiles(data.automobiles);
     } else {
       console.error(response);
     }
@@ -112,7 +121,7 @@ function App(props) {
   // }
 
   useEffect(()=>{
-    // getManufacturers();
+    getManufacturers();
     getModels();
     getAutomobiles();
     getCustomers();
@@ -122,7 +131,7 @@ function App(props) {
     // getAppointments();
   }, []);
 
-
+  console.log("in App.js, automobiles: ", automobiles);
   return (
     <BrowserRouter>
       <Nav />
@@ -131,14 +140,14 @@ function App(props) {
           <Route path="/" element={<MainPage />} />
           <Route path="manufacturers">
             <Route index element={<ManufacturerList manufacturers={manufacturers} />}/>
-            <Route path="new" element={<ManufacturerForm manufacturers={manufacturers} />}/>
+            <Route path="new" element={<ManufacturerForm />}/>
           </Route>
           <Route path="models">
             <Route index element={<ModelList models={models} />}/>
             <Route path="new" element={<ModelForm getModels={ getModels }/>}/>
           </Route>
           <Route path="automobiles">
-            <Route index element={<AutomobileList automobiles={automobiles} getAutomobiles={getAutomobiles}/>}/>
+            <Route index element={<AutomobileList automobiles={automobiles} />}/>
             <Route path="new" element={<AutomobileForm getAutomobiles={getAutomobiles} getModels={getModels} />}/>
           </Route>
           <Route path="salespeople">

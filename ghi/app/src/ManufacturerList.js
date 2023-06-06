@@ -1,6 +1,6 @@
 function ManufacturerList({manufacturers}){
     return(
-        <div>
+        <>
             <h1>Manufacturers</h1>
             <table className="table table-striped table-hover">
                 <thead>
@@ -9,7 +9,7 @@ function ManufacturerList({manufacturers}){
                     </tr>
                 </thead>
                 <tbody>
-                    {manufacturers?.map(manufacturer => {
+                    {manufacturers?.map((manufacturer) => {
                         return(
                             <tr key={manufacturer.id}>
                                 <td>{manufacturer.name}</td>
@@ -18,7 +18,7 @@ function ManufacturerList({manufacturers}){
                     })}
                 </tbody>
             </table>
-        </div>
+        </>
     );
 }
 

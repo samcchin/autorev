@@ -10,12 +10,12 @@ function ModelList({models}){
           </tr>
         </thead>
         <tbody>
-          {models.map((model) => {
+          {models?.map((model) => {
             return (
               <tr key={model.id}>
                 <td>{model.name}</td>
                 <td>{model.manufacturer.name}</td>
-                <td><img src={model.picture_url}/> </td>
+                <td><img alt="" height="100" width="100" src={model.picture_url}/> </td>
               </tr>
             );
           })}

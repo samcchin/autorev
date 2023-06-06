@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+
 function CustomerList(){
     <p>This is the CustomerList page</p>
 }

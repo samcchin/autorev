@@ -59,45 +59,46 @@ function AutomobileForm({getAutomobiles, getModels}){
         setVin(event.target.value);
     }
 
-
     return(
-        <div className="row">
-            <div className="offset-3">
-                <div className="shadow p-4 mt-4">
-                    <h1>Add an automobile to inventory</h1>
-                    <form onSubmit={handleSubmit} id="add-auto-form">
-                        <div className ="form-floating mb-3">
-                            <input onChange={handleYearChange} value={year} placeholder='year' required type="number" name="year" id="year" className="form-control" />
-                            <label htmlFor="year">Year...</label>
-                        </div>
-                        <div className ="form-floating mb-3">
-                        <input onChange={handleColorChange} placeholder="Color" required type="text" name="color" id="color" className="form-control" />
-                        <label htmlFor="color"> Color... </label>
-                        </div>
-                        <div className ="form-floating mb-3">
-                            <input onChange={handleVinChange} placeholder="VIN" required type="text" name="vin" id="vin" className="form-control" />
-                            <label htmlFor="vin"> VIN... </label>
-                        </div>
-                        <div className ="form-floating mb-3">
-                            <select onChange={handleModelChange} required name = "model" id="model" className="form-select">
-                                <option value="">Choose a model...</option>
-                                {models.map(model => {
-                                    return (
-                                        <option key={model.id} value={model.id}>
-                                            {model.name} {model.manfacturer.name}
-                                        </option>
-                                    );
-                                }
+        <>
+            <div className="row">
+                <div className="offset-3 col-6">
+                    <div className="shadow p-4 mt-4">
+                        <h1>Add an automobile to inventory</h1>
+                        <form onSubmit={handleSubmit} id="add-automobile-form">
+                            <div className ="form-floating mb-3">
+                                <input onChange={handleYearChange} value={year} placeholder='year' required type="number" name="year" id="year" className="form-control" />
+                                <label htmlFor="year">Year...</label>
+                            </div>
+                            <div className ="form-floating mb-3">
+                                <input onChange={handleColorChange} placeholder="Color" required type="text" name="color" id="color" className="form-control" />
+                                <label htmlFor="color"> Color... </label>
+                            </div>
+                            <div className ="form-floating mb-3">
+                                <input onChange={handleVinChange} placeholder="VIN" required type="text" name="vin" id="vin" className="form-control" />
+                                <label htmlFor="vin"> VIN... </label>
+                            </div>
+                            <div className ="form-floating mb-3">
+                                <select onChange={handleModelChange} required name = "model" id="model" className="form-select">
+                                    <option value="">Choose a model...</option>
+                                    {models.map(model => {
+                                        return (
+                                            <option key={model.id} value={model.id}>
+                                                {model.name} {model.manfacturer.name}
+                                            </option>
+                                        );
+                                    }
                                     )}
-                            </select>
-                        </div>
-                        <div className="d-grid col-md 6 mx-auto">
-                            <button className="btn btn-outline-primary">Create</button>
-                        </div>
-                    </form>
+                                </select>
+                            </div>
+                            <div className="d-grid col-md 6 mx-auto">
+                                <button className="btn btn-primary">Create</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 
 }

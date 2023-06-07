@@ -23,7 +23,7 @@ function ServiceAppointmentList({appointments, getAppointments}){
     }
 
     const filteredAppointments = appointments.filter(
-      (appointment) => appointment.status !== "completed" && appointment.status !== "canceled"
+      appointment => appointment.status !== "completed" && appointment.status !== "canceled"
     );
 
     return (

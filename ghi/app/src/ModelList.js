@@ -1,6 +1,7 @@
 function ModelList({models}){
   return (
     <>
+      <h1>Models</h1>
       <table className="table table-striped table-hover">
         <thead>
           <tr>

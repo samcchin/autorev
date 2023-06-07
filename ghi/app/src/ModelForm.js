@@ -40,7 +40,7 @@ function ModelForm({ getModels }){
       const newModel = await response.json();
       console.log(newModel)
       getModels();
-      
+
       setName('');
       setPictureUrl('');
       setManufacturer('');
@@ -49,18 +49,15 @@ function ModelForm({ getModels }){
   }
 
   const handleNameChange = (event) => {
-      const value = event.target.value;
-      setName(value)
+      setName(event.target.value)
   }
 
   const handlePictureUrlChange = (event) => {
-      const value = event.target.value;
-      setPictureUrl(value)
+      setPictureUrl(event.target.value)
   }
 
   const handleManufacturerChange = (event) => {
-      const value = event.target.value;
-      setManufacturer(value)
+      setManufacturer(event.target.value)
   }
 
   return (

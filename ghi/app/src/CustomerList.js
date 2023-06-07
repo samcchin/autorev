@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-
 function CustomersList({customers}) {
     return(
-        <div>
+        <>
             <h1>Customers</h1>
             <table className='table table-striped table-hover'>
                 <thead>
@@ -24,10 +22,11 @@ function CustomersList({customers}) {
                                 <td>{customer.phone_number}</td>
                             </tr>
                         )
-                        })}
+                    })}
                 </tbody>
             </table>
-        </div>
+        </>
     )
 }
+
 export default CustomersList;

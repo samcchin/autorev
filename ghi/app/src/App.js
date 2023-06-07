@@ -14,20 +14,20 @@ import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
 import SalesList from './SalesList';
 import SalesForm from './SalesForm';
-import SalesHistory from './SalesHistory';
-// import TechniciansList from './TechniciansList';
-// import TechnicianForm from './TechnicianForm';
-// import ServiceAppointmentList from './ServiceAppointmentList';
-// import ServiceAppointmentForm from './ServiceAppointmentForm';
-// import ServiceHistory from './ServiceHistory';
+import SalespersonHistory from './SalespersonHistory';
+import TechniciansList from './TechniciansList';
+import TechnicianForm from './TechnicianForm';
+import ServiceAppointmentList from './ServiceAppointmentList';
+import ServiceAppointmentForm from './ServiceAppointmentForm';
+import ServiceHistory from './ServiceHistory';
 
 
 function App(props) {
   const [manufacturers, setManufacturers] = useState([]);
   const [models, setModels] = useState([]);
   const [automobiles, setAutomobiles] = useState([]);
-  // const [appointments, setAppointments] = useState([]);
-  // const [technicians, setTechnicians] = useState([]);
+  const [appointments, setAppointments] = useState([]);
+  const [technicians, setTechnicians] = useState([]);
   const [sales, setSales] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [salespeople, setSalespeople] = useState([]);
@@ -98,27 +98,27 @@ function App(props) {
     }
   }
 
-  // async function getTechnicians(){
-  //   const url = 'http://localhost:8080/api/technicians/'
-  //   const response = await fetch(url);
-  //   if (response.ok){
-  //     const data = await response.json();
-  //     setTechnicians(data.technicians);
-  //   } else {
-  //     console.error(response);
-  //   }
-  // }
+  async function getTechnicians(){
+    const url = 'http://localhost:8080/api/technicians/'
+    const response = await fetch(url);
+    if (response.ok){
+      const data = await response.json();
+      setTechnicians(data.technicians);
+    } else {
+      console.error(response);
+    }
+  }
 
-  // async function getAppointments(){
-  //   const url = 'http://localhost:8080/api/appointments/'
-  //   const response = await fetch(url);
-  //   if (response.ok){
-  //     const data = await response.json();
-  //     setAppointments(data.appointments);
-  //   } else {
-  //     console.error(response);
-  //   }
-  // }
+  async function getAppointments(){
+    const url = 'http://localhost:8080/api/appointments/'
+    const response = await fetch(url);
+    if (response.ok){
+      const data = await response.json();
+      setAppointments(data.appointments);
+    } else {
+      console.error(response);
+    }
+  }
 
   useEffect(()=>{
     getManufacturers();
@@ -127,11 +127,10 @@ function App(props) {
     getCustomers();
     getSalespeople();
     getSales();
-    // getTechnicians();
-    // getAppointments();
+    getTechnicians();
+    getAppointments();
   }, []);
 
-  console.log("in App.js, automobiles: ", automobiles);
   return (
     <BrowserRouter>
       <Nav />
@@ -148,7 +147,7 @@ function App(props) {
           </Route>
           <Route path="automobiles">
             <Route index element={<AutomobileList automobiles={automobiles} />}/>
-            <Route path="new" element={<AutomobileForm getAutomobiles={getAutomobiles} getModels={getModels} />}/>
+            <Route path="new" element={<AutomobileForm getAutomobiles={getAutomobiles}/>}/>
           </Route>
           <Route path="salespeople">
             <Route index element={<SalespeopleList salespeople={salespeople} />}/>
@@ -160,10 +159,10 @@ function App(props) {
           </Route>
           <Route path="sales">
             <Route index element={<SalesList sales={sales}/>}/>
-            <Route path="new" element={<SalesForm getSales={getSales} getAutomobiles={getAutomobiles} getCustomers={getCustomers} getSalespeople={getSalespeople} />}/>
-            <Route path="history" element={<SalesHistory sales={sales} />}/>
+            <Route path="new" element={<SalesForm getSales={getSales} />}/>
+            <Route path="history" element={<SalespersonHistory sales={sales} />}/>
           </Route>
-          {/* <Route path="technicians">
+          <Route path="technicians">
             <Route index element={<TechniciansList technicians={technicians} />}/>
             <Route path="new" element={<TechnicianForm getTechnicians={getTechnicians} />}/>
           </Route>
@@ -171,7 +170,7 @@ function App(props) {
             <Route index element={<ServiceAppointmentList appointments={appointments}/>}/>
             <Route path="new" element={<ServiceAppointmentForm getAppointments={getAppointments}/>}/>
             <Route path="history" element={<ServiceHistory appointments={appointments}/>}/>
-          </Route> */}
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,7 +1,7 @@
 function AutomobileList({automobiles}){
-    console.log("automobiles:", automobiles);
-    return (
-        <div className='container'>
+  return (
+    <>
+      <h1>Automobiles</h1>
       <table className="table table-striped">
         <thead>
           <tr>
@@ -14,7 +14,7 @@ function AutomobileList({automobiles}){
           </tr>
         </thead>
         <tbody>
-        {automobiles.map(automobile => {
+        {automobiles?.map(automobile => {
           return (
             <tr key={automobile.id}>
               <td>{ automobile.vin }</td>
@@ -28,10 +28,8 @@ function AutomobileList({automobiles}){
         })}
         </tbody>
       </table>
-    </div>
-    )
+    </>
+  )
 }
-
-
 
 export default AutomobileList;

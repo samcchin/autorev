@@ -257,27 +257,226 @@ To get a list of automobiles, you would use the GET HTTP request to the URL  htt
 
 
 ## Service microservice
+The service microservice keeps track of service appointments for automobiles and their owners. This microservice obtains automobile data from the inventory service using polling, so that the most up-to-date inventory is reflected for the service team to make appointments. The poller is set to update the inventory of automobiles every minute.
 
-### Work In Progress
-##### Technicians
-A Technician model containing first_name, last_name, and employee_id fields.
+#### Service models
+This microservice includes three models, which are listed below.
 
-| Action                                       | Method                 | URL  |
+
+1. Technician Model
+⋅⋅⋅The Technician model contains the following fields, and each technician is associated with an appointment.
+⋅⋅⋅first_name: the first name of the technician
+⋅⋅⋅last_name: the last name of the technician
+⋅⋅⋅employee_id: the unique identifier of each technician
+
+
+2. AutomobileVO Model
+⋅⋅⋅The AutomobileVO model is updated every 60 seconds with VINs from the Inventory service, using a **poller. Each automobile is associated with an appointment, based on the automobile’s VIN. The AutomobileVO model contains the following fields.
+⋅⋅⋅vin: the VIN is a unique identifier of each car
+⋅⋅⋅sold: the status of the vehicle on whether or not it was sold
+
+
+3. Appointment Model
+⋅⋅⋅The Appointment model contains the following fields, and within each appointment, a technician is assigned from the Technician model.
+⋅⋅⋅date_time: the date and time of an appointment
+⋅⋅⋅reason: the reason for the appointment
+⋅⋅⋅status: the status of an appointment (“created”, “completed”, “canceled”)
+⋅⋅⋅vin: the associated VIN from the AutomobileVO; the unique identified of a car
+⋅⋅⋅customer: the customer of the appointment
+⋅⋅⋅technician: the technician that will manage the appointment and is the Foreign Key, linking the technician model to the appointment model
+⋅⋅⋅vip_status: an appointment is marked VIP if the VIN provided for an appointment exists in the inventory, indicating that it was sold and the customer should receive special treatment
+
+
+
+#### Technicians
+A Technician is defined as an employee of CarCar that is assigned to an appointment to service a car.
+##### APIs to send and view data
+From Insomnia and your browser, you can access the Technician model endpoints at the following URLs.
+
+| Action                                       | Method                 | URL                                                                  |
 | :------------------------------|:------------------|:---------------------------------------------|
 | List technicians		 | 	GET	       |	http://localhost:8080/api/technicians/      |
 | Create a technician		 |	POST	       |	http://localhost:8080/api/technicians/      |
 | Delete a specific technician	 |	DELETE       |	http://localhost:8080/api/technicians/:id  |
 
-##### Appointments
-An Appointment model containing date_time, reason, status, vin, customer and technician fields. The technician field is the foreign key.
+**Creating a technician**
+To create a technician, you would use the POST HTTP request to the URL http://localhost:8080/api/technicians/. Creating a technician requires the technician’s first name, last name and employee ID. The employee ID is based on the initial of the first name and full last name. The return value of creating a single manufacturer is its first name, last name and employee ID.
+```
+{
+  "first_name": "Matthew",
+  "last_name": "Campbell",
+  "employee_id": "mcampbell"
+}
+```
 
-| Action| Method       | URL                                                                              |
-| :----------------------|:------------|:-----------------------------------|
+**Getting a list of technicians**
+To get a list of technicians, you would use the GET HTTP request to the URL http://localhost:8080/api/technicians/.The list of technicians is an object with the key "technicians" set to a list of technicians.
+```
+{
+"technicians": [
+		{
+			"href": "/api/technicians/1/",
+			"id": 1,
+			"first_name": "Matthew",
+			"last_name": "Campbell",
+			"employee_id": "mcampbell"
+		},
+		{
+			"href": "/api/technicians/2/",
+			"id": 2,
+			"first_name": "Madilyn",
+			"last_name": "Scott",
+			"employee_id": "mscott"
+		},
+	]
+}
+
+```
+**Deleting a technician**
+To remove a technician, you would use the DELETE HTTP request to the URL http://localhost:8080/api/technicians/id. Deleting a technician requires the ID of a technician. Upon deletion, the response will read as the following:
+```
+{
+	"deleted": true
+}
+```
+
+
+##### Front-end views
+**Technicians**
+A page that lists all technicians, showing each technician’s employee ID and name.
+
+**Add a technician**
+A form that allows a person to enter an automobile technician's name and employee ID. When the form is submitted, the automobile technician is created in the application.
+
+
+
+#### Appointments
+A service appointment is created when a customer is in need to get their car serviced.
+##### APIs to send and view data
+From Insomnia and your browser, you can access the Technician model endpoints at the following URLs.
+
+| Action                                                    | Method       | URL                                                                              |
+| :--------------------------------------|:------------|:----------------------------------------------------|
 | List appointments		         | 	GET	  | http://localhost:8080/api/appointments/                  |
-| Create an appointment |	POST	  | http://localhost:8080/api/appointments/                  |
-| Delete an appointment |	DELETE   | http://localhost:8080/api/appointments/:id              |
+| Create an appointment	                       |	POST	  | http://localhost:8080/api/appointments/                  |
+| Delete an appointment	                       |	DELETE   | http://localhost:8080/api/appointments/:id              |
 | Set appointment status to "canceled” |	PUT         | http://localhost:8080/api/appointments/:id/cancel  |
 | Set appointment status to "completed”   |	PUT         | http://localhost:8080/api/appointments/:id/finish    |
+
+
+**Creating an appointment**
+To create an appointment, you would use the POST HTTP request to the URL  http://localhost:8080/api/appointments/. Creating an appointment requires the car’s VIN, the customer name, the date & time, the technician (selected from a dropdown - based on the technician model), and the reason for the appointment. The return value of creating an appointment will be the details entered, along with the technician's details.
+```
+{
+	"vin":"WBAPH5G51BNM76282",
+	"customer": "Sam Chin",
+	"date_time": "2023-06-22T14:27",
+	"technician": "ovinluan",
+	"reason": "Oil Change"
+}
+
+```
+
+**Getting a list of appointments**
+To get a list of appointments, you would use the GET HTTP request to the URL http://localhost:8080/api/appointments/.The list of appointments is an object with the key "appointments" set to a list of appointments.
+```
+{
+	"appointments": [
+		{
+			"href": "/api/appointments/2/",
+			"id": 2,
+			"date_time": "2023-06-09T08:09:00+00:00",
+			"reason": "Oil Change",
+			"status": "",
+			"vin": "WBAPH5G51BNM76282",
+			"customer": "Sam Chin",
+			"technician": {
+				"href": "/api/technicians/6/",
+				"id": 6,
+				"first_name": "Oliver",
+				"last_name": "Vinluan",
+				"employee_id": "ovinluan"
+			},
+			"vip_status": false
+		}
+	]
+}
+
+
+```
+
+**Deleting an appointment**
+To remove an appointment, you would use the DELETE HTTP request to the URL http://localhost:8080/api/appointments/:id. Deleting a technician requires the ID of an appointment. Upon deletion, the response will read as the following:
+```
+{
+	"deleted": true
+}
+```
+
+**Canceling an appointment**
+To cancel an appointment, you would use the PUT HTTP request to the URL http://localhost:8080/api/appointments/:id/cancel. Canceling an appointment requires the ID of an appointment. Upon cancelation, it will set the status of the appointment to “canceled”.
+```
+{
+	"appointments": [
+		{
+			"href": "/api/appointments/2/",
+			"id": 2,
+			"date_time": "2023-06-09T08:09:00+00:00",
+			"reason": "Oil Change",
+			"status": "canceled",
+			"vin": "WBAPH5G51BNM76282",
+			"customer": "Sam Chin",
+			"technician": {
+				"href": "/api/technicians/6/",
+				"id": 6,
+				"first_name": "Oliver",
+				"last_name": "Vinluan",
+				"employee_id": "ovinluan"
+			},
+			"vip_status": false
+		}
+	]
+}
+```
+
+**Completing an appointment**
+To complete an appointment, you would use the PUT HTTP request to the URL http://localhost:8080/api/appointments/:d/finish. Completing an appointment requires the ID of an appointment. Upon completion, it will set the status of the appointment to “completed”.
+```
+{
+	"appointments": [
+		{
+			"href": "/api/appointments/2/",
+			"id": 2,
+			"date_time": "2023-06-09T08:09:00+00:00",
+			"reason": "Oil Change",
+			"status": "completed",
+			"vin": "WBAPH5G51BNM76282",
+			"customer": "Sam Chin",
+			"technician": {
+				"href": "/api/technicians/6/",
+				"id": 6,
+				"first_name": "Oliver",
+				"last_name": "Vinluan",
+				"employee_id": "ovinluan"
+			},
+			"vip_status": false
+		}
+	]
+}
+```
+
+##### Front-end views
+**Service Appointments**
+An Appointment model containing date_time, reason, status, vin, customer and technician fields. The technician field is the foreign key.
+A page that shows a list of scheduled appointments that contains the details collected in the form: VIN, customer name, date and time of the appointment, the assigned technician's name, and the reason for the service.
+⋅⋅⋅VIP: If the VIN provided for an appointment exists in our inventory, meaning it was sold, we should give the customer special treatment and is listed as VIP.
+⋅⋅⋅Appointment Status: Each appointment in the list of appointments have a button that allows a service concierge to "cancel" the appointment, or to mark the appointment as "finished". When a service appointment is canceled or finished, it will no longer show up in the list of appointments.
+
+**Create a Service Appointment**
+A form that allows a service concierge to enter the VIN of the vehicle, the customer's name, the date and time of the appointment, the assigned technician, and a reason for the service appointment (like "oil change" or "routine maintenance"). When the form is submitted, the service appointment is saved to the application.
+
+**Service History**
+A page that shows the history of all service appointments— both current and canceled or finished. Additionally, it allows for the searching of a particular VIN. Someone can type in the VIN and click “Search”. On form submission, it displays the filtered list of service appointments to include the vehicle's VIN, the appointment's VIP status, the customer's name, the date and time of the appointment, the assigned technician's name, the reason for the service, and the status of the service appointment (either "created", "canceled", or "finished").
 
 
 

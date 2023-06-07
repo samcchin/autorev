@@ -2,24 +2,34 @@ import React, { useState } from "react";
 
 function ServiceHistory({appointments}){
   const [searchVin, setSearchVin] = useState('');
+  const [searchClick, setSearchClick] = useState(false)
 
-  const filteredAppointments = appointments.filter(
-    appointment => appointment.vin.includes(searchVin))
 
-  const handleSearch = (event) => {
+
+  const handleSearchClick = (event) => {
     event.preventDefault();
-    const value = event.target.value
-    setSearchVin(value);
+    setSearchClick(true);
+
   }
+
+  const handleVinSearch = (event) => {
+    setSearchVin(event.target.value)
+  }
+
+  const filteredAppointments = searchClick?
+    appointments.filter(appointment =>
+    appointment.vin.includes(searchVin))
+    : appointments;
+
 
   return (
     <>
       <h1>Service History</h1>
-      <form onSubmit={handleSearch}>
+      <form onSubmit={handleSearchClick}>
       <input
         placeholder="Search by VIN..."
         value={searchVin}
-        onChange={handleSearch}
+        onChange={handleVinSearch}
       />
       <button type="submit" className="btn-primary btn-search">Search</button>
       </form>

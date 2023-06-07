@@ -6,7 +6,7 @@ Team:
 
 
 ## Design
-CarCar, an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales. The service center and sales are microservices of the application, and both utilize a poller to integrate with other services. The Service API handles the automobile service appointments and Sales API handles the sales information.
+CarCar is an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales. The service center and sales are microservices of the application, and both utilize a poller to integrate with other services. The Service API handles the automobile service appointments and Sales API handles the sales information.
 
 ![Project Beta Diagram](/assets/images/projectbetadiagram.png "Project Beta Diagram of Front End and Back End")
 [Excalidraw Diagram](https://excalidraw.com/#json=liX7w-KNOHZDifpUVH1j_,TO2QvmVIfyR0yuQZ-AmekQ)
@@ -27,6 +27,7 @@ docker-compose up
 Note: When you run docker-compose up and if you're on macOS, you will see a warning about an environment variable named OS being missing. You can safely ignore this.
 
 3.  You will be able to access the webpage on your browser at localhost:3000. In addition, the following ports for each of the APIs are below:
+|Ports |URL|
 | :-----------------|:------------------|
 | React                    | http://localhost:3000/      |
 | inventory-api       | http://localhost:8100/      |

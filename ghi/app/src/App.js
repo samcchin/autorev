@@ -23,6 +23,7 @@ import ServiceHistory from './ServiceHistory';
 
 
 function App(props) {
+  console.log("props from app.js, which is not called at any point: ", props);
   const [manufacturers, setManufacturers] = useState([]);
   const [models, setModels] = useState([]);
   const [automobiles, setAutomobiles] = useState([]);
@@ -88,10 +89,14 @@ function App(props) {
   }
 
   async function getSales(){
+    console.log("running getSales()")
     const url = 'http://localhost:8090/api/sales/'
     const response = await fetch(url);
+    console.log("response from getsales fetch: ", response);
     if (response.ok){
+      console.log("response was ok.")
       const data = await response.json();
+      console.log("data returned from await response.json(): ", data);
       setSales(data.sales);
     } else {
       console.error(response);

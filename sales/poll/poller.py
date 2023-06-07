@@ -14,9 +14,13 @@ from sales_rest.models import AutomobileVO
 
 def get_Automobiles():
     url = "http://project-beta-inventory-api-1:8000/api/automobiles/"
+    print("poller get_automobiles")
     response = requests.get(url)
+    print("response from requests.get(url): ", response)
     content = json.loads(response.content)
+    print("content from json.loads(response.content)")
     for automobile in content["automobiles"]:
+        print("automobile in content[automobiles]: ", automobile)
         AutomobileVO.objects.update_or_create(
             vin=automobile["vin"],
             sold=automobile["sold"]

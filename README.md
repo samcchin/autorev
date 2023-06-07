@@ -2,18 +2,37 @@
 
 Team:
 
-* Benjamin Ostler -
-* Person 2 - Which microservice?
+* Benjamin Ostler - Sales microservice
+* Samantha Chin - Service microservice
 
-## Design
+## Getting Started
+1. Clone the repository by running the following command in your Terminal:
+```
+git clone https://gitlab.com/benjaminostler/project-beta.git
+```
 
-After cloning the repository, run the following commands to get this website up and running:
+2. After cloning the repository, set up the docker containers and volume by running these commands, while you are in the correct project directory:
+```
 docker volume create beta-data
 docker-compose build
 docker-compose up
+```
+Note: When you run docker-compose up and if you're on macOS, you will see a warning about an environment variable named OS being missing. You can safely ignore this.
+
+3.  You will be able to access the webpage on your browser at localhost:3000. In addition, the following ports for each of the APIs are below:
+| :-----------------|:------------------|
+| React                    | http://localhost:3000/      |
+| inventory-api       | http://localhost:8100/      |
+| sales-api       | http://localhost:8090/      |
+| service-api       | http://localhost:8080/     |
+
+
 
 ## Inventory
-The following documentation describes the available functionality in the Inventory API. Inventory consists of three models: 1) Manufacturers, 2) Vehicle Models, 3) Automobiles
+The following documentation describes the available functionality in the Inventory API. Inventory consists of three models:
+1. Manufacturers
+2. Vehicle Models
+3. Automobiles
 
 #### Manufacturers
 A Manufacturer is defined as the company that manufactures the automobile.
@@ -135,6 +154,7 @@ To get a list of vehicle models, you would use the GET HTTP request to the URL h
   ]
 }
 ```
+
 
 #### Automobiles
 Automobile: An automobile model is defined as the actual automobile of a specific vehicle model.

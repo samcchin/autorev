@@ -475,16 +475,16 @@ To complete an appointment, you would use the PUT HTTP request to the URL http:/
 
 
 **Service Appointments**
-An Appointment model containing date_time, reason, status, vin, customer and technician fields. The technician field is the foreign key.
 A page that shows a list of scheduled appointments that contains the details collected in the form: VIN, customer name, date and time of the appointment, the assigned technician's name, and the reason for the service.
-   VIP: If the VIN provided for an appointment exists in our inventory, meaning it was sold, we should give the customer special treatment and is listed as VIP.
-   Appointment Status: Each appointment in the list of appointments have a button that allows a service concierge to "cancel" the appointment, or to mark the appointment as "finished". When a service appointment is canceled or finished, it will no longer show up in the list of appointments.
+   * VIP: If the VIN provided for an appointment exists in our inventory, meaning it was sold, we should give the customer special treatment and is listed as VIP.
+   * Appointment Status: Each appointment in the list of appointments have a button that allows a service concierge to "cancel" the appointment, or to mark the appointment as "finished". When a service appointment is canceled or finished, it will no longer show up in the list of appointments.
 
 **Create a Service Appointment**
 A form that allows a service concierge to enter the VIN of the vehicle, the customer's name, the date and time of the appointment, the assigned technician, and a reason for the service appointment (like "oil change" or "routine maintenance"). When the form is submitted, the service appointment is saved to the application.
 
 **Service History**
-A page that shows the history of all service appointments— both current and canceled or finished. Additionally, it allows for the searching of a particular VIN. Someone can type in the VIN and click “Search”. On form submission, it displays the filtered list of service appointments to include the vehicle's VIN, the appointment's VIP status, the customer's name, the date and time of the appointment, the assigned technician's name, the reason for the service, and the status of the service appointment (either "created", "canceled", or "finished").
+A page that shows the history of all service appointments— both current and canceled or finished. Additionally, it allows for the searching of a particular VIN.
+    * Someone can type in the VIN and click “Search”. On form submission, it displays the filtered list of service appointments to include the vehicle's VIN, the appointment's VIP status, the customer's name, the date and time of the appointment, the assigned technician's name, the reason for the service, and the status of the service appointment (either "created", "canceled", or "finished").
 
 
 

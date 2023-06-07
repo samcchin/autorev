@@ -1,9 +1,16 @@
 # CarCar
 
 Team:
-
 * Benjamin Ostler - Sales microservice
 * Samantha Chin - Service microservice
+
+
+## Design
+CarCar, an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales. The service center and sales are microservices of the application, and both utilize a poller to integrate with other services. The Service API handles the automobile service appointments and Sales API handles the sales information.
+
+![Project Beta Diagram](/assets/images/projectbetadiagram.png "Project Beta Diagram of Front End and Back End")
+[Excalidraw Diagram](https://excalidraw.com/#json=liX7w-KNOHZDifpUVH1j_,TO2QvmVIfyR0yuQZ-AmekQ)
+
 
 ## Getting Started
 1. Clone the repository by running the following command in your Terminal:

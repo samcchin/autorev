@@ -2,8 +2,8 @@
 
 Team:
 
-* Benjamin Ostler - 
-* Person 2 - Which microservice?
+* Benjamin Ostler - Sales microservices
+* Samantha Chin - Service microservice?
 
 ## Design
 

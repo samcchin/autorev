@@ -27,12 +27,13 @@ docker-compose up
 Note: When you run docker-compose up and if you're on macOS, you will see a warning about an environment variable named OS being missing. You can safely ignore this.
 
 3.  You will be able to access the webpage on your browser at localhost:3000. In addition, the following ports for each of the APIs are below:
-|Ports |URL|
-| :-----------------|:------------------|
-| React                    | http://localhost:3000/      |
-| inventory-api       | http://localhost:8100/      |
-| sales-api       | http://localhost:8090/      |
-| service-api       | http://localhost:8080/     |
+
+Ports|URL
+--- | ---
+React                    | http://localhost:3000/
+inventory-api       | http://localhost:8100/
+sales-api       | http://localhost:8090/
+service-api       | http://localhost:8080/
 
 
 

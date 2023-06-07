@@ -1,19 +1,30 @@
 
-function ServiceAppointmentList({appointments}){
+function ServiceAppointmentList({appointments, getAppointments}){
     if (!appointments || !Array.isArray(appointments)){
         return null;
     }
-    const deleteAppointment = async ({appointments, getAppointments}) => {
-      const appointmentUrl = "http://localhost:8080/api/appointments/"
-      const fetchConfig ={
-        method:"delete",
+
+    const updateAppointmentStatus = async (appointmentId, status) => {
+      const appointmentUrl = `http://localhost:8080/api/appointments/${appointmentId}/`;
+      const fetchConfig = {
+        method: "PUT",
+        body: JSON.stringify({status}),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+
       }
-      const response = await fetch(appointmentUrl, fetchConfig)
+
+      const response = await fetch(appointmentUrl, fetchConfig);
       if (response.ok){
-        getAppointments();
+        getAppointments()
+        window.location.reload()
       }
     }
 
+    const filteredAppointments = appointments.filter(
+      (appointment) => appointment.status !== "completed" && appointment.status !== "canceled"
+    );
 
     return (
       <>
@@ -31,7 +42,7 @@ function ServiceAppointmentList({appointments}){
             </tr>
           </thead>
           <tbody>
-            {appointments?.map((appointment) => {
+            {filteredAppointments.map((appointment) => {
               const formattedDateTime = new Date(appointment.date_time).toLocaleString("en-US", {
                 year: 'numeric',
                 month: 'numeric',
@@ -41,6 +52,14 @@ function ServiceAppointmentList({appointments}){
                 hour12: true,
                 timeZone: "America/Los_Angeles"
               });
+
+              const handleCompletedAppointment = () => {
+                updateAppointmentStatus(appointment.id, "completed")
+              };
+
+              const handleCanceledAppointment = () => {
+                updateAppointmentStatus(appointment.id, "canceled")
+              }
 
               return (
                 <tr key={appointment.id}>
@@ -52,8 +71,10 @@ function ServiceAppointmentList({appointments}){
                   <td>{appointment.reason}</td>
                   <td></td>
                   <td>
-                    <button type="button" className="btn btn-success" onClick={() => deleteAppointment(appointment)}>Complete</button>
-                    <button className="btn btn-danger" onClick={() => deleteAppointment(appointment)}>Cancel</button>
+                    {appointment.status !== "completed" && (
+                    <button type="button" className="btn btn-success" onClick={handleCompletedAppointment}>Completed</button>)}
+                    {appointment.status !== "canceled" && (
+                    <button className="btn btn-danger" onClick={handleCanceledAppointment}>Canceled</button>)}
                   </td>
                 </tr>
               );

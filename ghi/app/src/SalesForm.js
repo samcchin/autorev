@@ -49,7 +49,7 @@ function SalesForm({ getSales }) {
         data.price = price;
         data.customer_id = customer;
         data.salesperson_id = salesperson;
-
+        console.log("data dictionary before fetch: ", data);
         const salesUrl = 'http://localhost:8090/api/sales/';
         const fetchConfig = {
             method: "post",
@@ -59,9 +59,11 @@ function SalesForm({ getSales }) {
             },
         };
         const response = await fetch(salesUrl, fetchConfig);
+        console.log("Sales Response after fetch: ", response);
         if (response.ok) {
+            console.log("response for Sales request was ok");
             const newSale = await response.json();
-            console.log(newSale);
+            console.log("Await Response.json() returns newSale: ", newSale)
             getSales();
 
             setAutomobile('');

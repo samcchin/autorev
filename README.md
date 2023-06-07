@@ -264,33 +264,33 @@ This microservice includes three models, which are listed below.
 
 
 1. Technician Model
-⋅⋅⋅The Technician model contains the following fields, and each technician is associated with an appointment.
-⋅⋅⋅first_name: the first name of the technician
-⋅⋅⋅last_name: the last name of the technician
-⋅⋅⋅employee_id: the unique identifier of each technician
+   The Technician model contains the following fields, and each technician is associated with an appointment.
+   **first_name:** the first name of the technician
+   **last_name:** the last name of the technician
+   **employee_id:** the unique identifier of each technician
 
 
 2. AutomobileVO Model
-⋅⋅⋅The AutomobileVO model is updated every 60 seconds with VINs from the Inventory service, using a **poller. Each automobile is associated with an appointment, based on the automobile’s VIN. The AutomobileVO model contains the following fields.
-⋅⋅⋅vin: the VIN is a unique identifier of each car
-⋅⋅⋅sold: the status of the vehicle on whether or not it was sold
+   The AutomobileVO model is updated every 60 seconds with VINs from the Inventory service, using a **poller. Each automobile is associated with an appointment, based on the automobile’s VIN. The AutomobileVO model contains the following fields.
+   **vin:** the VIN is a unique identifier of each car
+   **sold:** the status of the vehicle on whether or not it was sold
 
 
 3. Appointment Model
-⋅⋅⋅The Appointment model contains the following fields, and within each appointment, a technician is assigned from the Technician model.
-⋅⋅⋅date_time: the date and time of an appointment
-⋅⋅⋅reason: the reason for the appointment
-⋅⋅⋅status: the status of an appointment (“created”, “completed”, “canceled”)
-⋅⋅⋅vin: the associated VIN from the AutomobileVO; the unique identified of a car
-⋅⋅⋅customer: the customer of the appointment
-⋅⋅⋅technician: the technician that will manage the appointment and is the Foreign Key, linking the technician model to the appointment model
-⋅⋅⋅vip_status: an appointment is marked VIP if the VIN provided for an appointment exists in the inventory, indicating that it was sold and the customer should receive special treatment
+   The Appointment model contains the following fields, and within each appointment, a technician is assigned from the Technician model.
+   **date_time:** the date and time of an appointment
+   **reason:** the reason for the appointment
+   **status:** the status of an appointment (“created”, “completed”, “canceled”)
+   **vin:** the associated VIN from the AutomobileVO; the unique identified of a car
+   **customer:** the customer of the appointment
+   **technician:** the technician that will manage the appointment and is the Foreign Key, linking the technician model to the appointment model
+   **vip_status:** an appointment is marked VIP if the VIN provided for an appointment exists in the inventory, indicating that it was sold and the customer should receive special treatment
 
 
 
 #### Technicians
 A Technician is defined as an employee of CarCar that is assigned to an appointment to service a car.
-##### APIs to send and view data
+**APIs to send and view data**
 From Insomnia and your browser, you can access the Technician model endpoints at the following URLs.
 
 | Action                                       | Method                 | URL                                                                  |
@@ -341,7 +341,7 @@ To remove a technician, you would use the DELETE HTTP request to the URL http://
 ```
 
 
-##### Front-end views
+**Front-end views**
 **Technicians**
 A page that lists all technicians, showing each technician’s employee ID and name.
 
@@ -352,7 +352,7 @@ A form that allows a person to enter an automobile technician's name and employe
 
 #### Appointments
 A service appointment is created when a customer is in need to get their car serviced.
-##### APIs to send and view data
+**APIs to send and view data**
 From Insomnia and your browser, you can access the Technician model endpoints at the following URLs.
 
 | Action                                                    | Method       | URL                                                                              |
@@ -465,12 +465,12 @@ To complete an appointment, you would use the PUT HTTP request to the URL http:/
 }
 ```
 
-##### Front-end views
+**Front-end views**
 **Service Appointments**
 An Appointment model containing date_time, reason, status, vin, customer and technician fields. The technician field is the foreign key.
 A page that shows a list of scheduled appointments that contains the details collected in the form: VIN, customer name, date and time of the appointment, the assigned technician's name, and the reason for the service.
-⋅⋅⋅VIP: If the VIN provided for an appointment exists in our inventory, meaning it was sold, we should give the customer special treatment and is listed as VIP.
-⋅⋅⋅Appointment Status: Each appointment in the list of appointments have a button that allows a service concierge to "cancel" the appointment, or to mark the appointment as "finished". When a service appointment is canceled or finished, it will no longer show up in the list of appointments.
+   VIP: If the VIN provided for an appointment exists in our inventory, meaning it was sold, we should give the customer special treatment and is listed as VIP.
+   Appointment Status: Each appointment in the list of appointments have a button that allows a service concierge to "cancel" the appointment, or to mark the appointment as "finished". When a service appointment is canceled or finished, it will no longer show up in the list of appointments.
 
 **Create a Service Appointment**
 A form that allows a service concierge to enter the VIN of the vehicle, the customer's name, the date and time of the appointment, the assigned technician, and a reason for the service appointment (like "oil change" or "routine maintenance"). When the form is submitted, the service appointment is saved to the application.

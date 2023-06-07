@@ -171,7 +171,7 @@ def api_list_automobileVO(request):
 # Get service history - list of appointments (Based on VIN)
 @require_http_methods(["GET"])
 def api_show_service_history(request, vin):
-    appointments = Appointment.objects.filter(id=vin)
+    appointments = Appointment.objects.filter(vin=vin)
     return JsonResponse(
         {"appointments": appointments},
         encoder=AppointmentEncoder

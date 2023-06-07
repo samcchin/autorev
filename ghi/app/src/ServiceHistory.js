@@ -37,12 +37,21 @@ function ServiceHistory({appointments}){
         </thead>
         <tbody>
           {filteredAppointments?.map((appointment) => {
+              const formattedDateTime = new Date(appointment.date_time).toLocaleString("en-US", {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+                hour: 'numeric',
+                minute: 'numeric',
+                hour12: true,
+                timeZone: "America/Los_Angeles"
+              });
             return (
               <tr key={appointment.id}>
                 <td>{appointment.vin}</td>
                 <td>{appointment.vip_status ? "Yes":"No"}</td>
                 <td>{appointment.customer}</td>
-                <td>{appointment.date_time}</td>
+                <td>{formattedDateTime}</td>
                 <td>{`${appointment.technician.first_name} ${appointment.technician.last_name}`}</td>
                 <td>{appointment.reason}</td>
                 <td>{appointment.status}</td>

@@ -39,7 +39,6 @@ function ServiceAppointmentForm(){
             },
         }
         const response = await fetch(appointmentUrl, fetchConfig);
-        console.log(response)
         if (response.ok){
             const newAppointment = await response.json();
             console.log(newAppointment)
@@ -49,6 +48,8 @@ function ServiceAppointmentForm(){
             setTechnician('');
             setReason('');
             window.location.reload()
+        } else {
+            console.log("Error creating appointment:", response.status)
         }
     }
 
@@ -138,12 +139,6 @@ function ServiceAppointmentForm(){
         </div>
         </>
     )
-
-
-
-
-
-
 }
 
 export default ServiceAppointmentForm

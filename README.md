@@ -484,7 +484,7 @@ A form that allows a service concierge to enter the VIN of the vehicle, the cust
 
 **Service History**
 A page that shows the history of all service appointments— both current and canceled or finished. Additionally, it allows for the searching of a particular VIN.
-    * Someone can type in the VIN and click “Search”. On form submission, it displays the filtered list of service appointments to include the vehicle's VIN, the appointment's VIP status, the customer's name, the date and time of the appointment, the assigned technician's name, the reason for the service, and the status of the service appointment (either "created", "canceled", or "finished").
+   * Someone can type in the VIN and click “Search”. On form submission, it displays the filtered list of service appointments to include the vehicle's VIN, the appointment's VIP status, the customer's name, the date and time of the appointment, the assigned technician's name, the reason for the service, and the status of the service appointment (either "created", "canceled", or "finished").
 
 
 

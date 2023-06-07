@@ -13,7 +13,7 @@ from sales_rest.models import AutomobileVO
 
 
 def get_Automobiles():
-    url = "http://inventory-api:8000/api/automobiles/"
+    url = "http://project-beta-inventory-api-1:8000/api/automobiles/"
     response = requests.get(url)
     content = json.loads(response.content)
     for automobile in content["automobiles"]:

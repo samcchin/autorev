@@ -1,5 +1,4 @@
 function ManufacturerList({manufacturers}){
-    console.log("manufacturers in manufacturerlist", manufacturers);
     return(
         <>
             <h1>Manufacturers</h1>

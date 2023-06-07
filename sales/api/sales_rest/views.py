@@ -9,6 +9,7 @@ from .models import AutomobileVO, Salesperson, Sale, Customer
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
+        "id",
         "vin",
         "sold",
     ]
@@ -17,6 +18,7 @@ class AutomobileVOEncoder(ModelEncoder):
 class SalespersonEncoder(ModelEncoder):
     model = Salesperson
     properties = [
+        "id",
         "first_name",
         "last_name",
         "employee_id",
@@ -26,6 +28,7 @@ class SalespersonEncoder(ModelEncoder):
 class CustomerEncoder(ModelEncoder):
     model = Customer
     properties = [
+        "id",
         "first_name",
         "last_name",
         "address",
@@ -36,6 +39,7 @@ class CustomerEncoder(ModelEncoder):
 class SaleEncoder(ModelEncoder):
     model = Sale
     properties = [
+        "id",
         "price",
         "automobile",
         "salesperson",
@@ -128,7 +132,7 @@ def api_sales(request):
             {"sales": sales},
             encoder=SaleEncoder,
         )
-    else:
+    else:  # POST
         try:
             content = json.loads(request.body)
             sale = Sale.objects.create(**content)
@@ -137,7 +141,7 @@ def api_sales(request):
                 encoder=SaleEncoder,
                 safe=False,
             )
-        except ValueError:
+        except:
             response = JsonResponse(
                 {"message": "Could not create the sale"}
             )
@@ -199,7 +203,7 @@ def api_customers(request):
             {"customers": customers},
             encoder=CustomerEncoder,
         )
-    else:
+    else:  # POST
         try:
             content = json.loads(request.body)
             customer = Customer.objects.create(**content)
@@ -208,7 +212,7 @@ def api_customers(request):
                 encoder=CustomerEncoder,
                 safe=False,
             )
-        except ValueError:
+        except:
             response = JsonResponse(
                 {"message": "Could not create the customer"}
             )

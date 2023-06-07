@@ -31,17 +31,25 @@ function CustomerForm({getCustomers}) {
             setPhoneNumber('');
         }
     }
-    const handleFirstNameChange = (event) => {
-        setFirstName(event.target.value);
+
+    function handleLastNameChange(event) {
+        const value = event.target.value;
+        setLastName(value);
     }
-    const handleLastNameChange = (event) => {
-        setLastName(event.target.value);
+
+    function handleFirstNameChange(event) {
+        const value = event.target.value;
+        setFirstName(value);
     }
-    const handleAddressChange = (event) => {
-        setAddress(event.target.value);
+
+    function handleAddressChange(event) {
+        const value = event.target.value;
+        setAddress(value);
     }
-    const handlePhoneNumberChange = (event) => {
-        setPhoneNumber(event.target.value);
+
+    function handlePhoneNumberChange(event) {
+        const value = event.target.value;
+        setPhoneNumber(value);
     }
     return  (
         <>

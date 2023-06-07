@@ -14,7 +14,7 @@ import CustomerForm from './CustomerForm';
 import CustomerList from './CustomerList';
 import SalesList from './SalesList';
 import SalesForm from './SalesForm';
-import SalesHistory from './SalesHistory';
+import SalespersonHistory from './SalespersonHistory';
 import TechniciansList from './TechniciansList';
 import TechnicianForm from './TechnicianForm';
 import ServiceAppointmentList from './ServiceAppointmentList';
@@ -147,7 +147,7 @@ function App(props) {
           </Route>
           <Route path="automobiles">
             <Route index element={<AutomobileList automobiles={automobiles} />}/>
-            <Route path="new" element={<AutomobileForm getAutomobiles={getAutomobiles} getModels={getModels} />}/>
+            <Route path="new" element={<AutomobileForm getAutomobiles={getAutomobiles}/>}/>
           </Route>
           <Route path="salespeople">
             <Route index element={<SalespeopleList salespeople={salespeople} />}/>
@@ -159,8 +159,8 @@ function App(props) {
           </Route>
           <Route path="sales">
             <Route index element={<SalesList sales={sales}/>}/>
-            <Route path="new" element={<SalesForm getSales={getSales} getAutomobiles={getAutomobiles} getCustomers={getCustomers} getSalespeople={getSalespeople} />}/>
-            <Route path="history" element={<SalesHistory sales={sales} />}/>
+            <Route path="new" element={<SalesForm getSales={getSales} />}/>
+            <Route path="history" element={<SalespersonHistory sales={sales} />}/>
           </Route>
           <Route path="technicians">
             <Route index element={<TechniciansList technicians={technicians} />}/>

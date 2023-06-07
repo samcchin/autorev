@@ -28,31 +28,30 @@ function ManufacturerForm(){
         }
     }
 
-    const handleManufacturerNameChange = (event) =>{
-        const value = event.target.value;
-        setManufacturerName(value)
+    const handleManufacturerNameChange = (event) => {
+        setManufacturerName(event.target.value);
     }
 
     return(
         <>
-        <div className="row">
-          <div className="offset-3 col-6">
-            <div className="shadow p-4 mt-4">
-              <h1>Create a manufacturer</h1>
-              <form onSubmit={handleSubmit} id="create-manufacturer-form">
-                <div className="form-floating mb-3">
-                  <input
-                  onChange={handleManufacturerNameChange}
-                  placeholder="Manufacturer Name"
-                  required value ={manufacturerName}
-                  type="text" name="manufacturer_name" id="manufacturer_name" className="form-control"/>
-                  <label htmlFor="manufacturer_name">Manufacturer Name</label>
-                </div>
-                <button className="btn btn-primary">Create</button>
-              </form>
+          <div className="row">
+            <div className="offset-3 col-6">
+              <div className="shadow p-4 mt-4">
+                <h1>Create a manufacturer</h1>
+                <form onSubmit={handleSubmit} id="create-manufacturer-form">
+                  <div className="form-floating mb-3">
+                    <input
+                    onChange={handleManufacturerNameChange}
+                    placeholder="Manufacturer Name"
+                    required value ={manufacturerName}
+                    type="text" name="manufacturer_name" id="manufacturer_name" className="form-control"/>
+                    <label htmlFor="manufacturer_name">Manufacturer Name</label>
+                  </div>
+                  <button className="btn btn-primary">Create</button>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
         </>
     )
 

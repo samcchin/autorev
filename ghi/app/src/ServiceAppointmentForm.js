@@ -8,16 +8,16 @@ function ServiceAppointmentForm(){
     const [technician, setTechnician] = useState('');
     const [reason, setReason] = useState('');
 
-    useEffect(() => {
-        async function getTechnicians(){
-            const technicianUrl = '	http://localhost:8080/api/technicians/'
-            const response = await fetch(technicianUrl);
+    async function getTechnicians(){
+      const technicianUrl = '	http://localhost:8080/api/technicians/'
+      const response = await fetch(technicianUrl);
+      if (response.ok){
+          const data = await response.json();
+          setTechnicians(data.technicians);
+      }
+  }
 
-            if (response.ok){
-                const data = await response.json();
-                setTechnicians(data.technicians);
-            }
-        }
+    useEffect(() => {
         getTechnicians();
     }, []);
 

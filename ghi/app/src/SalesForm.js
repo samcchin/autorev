@@ -1,68 +1,21 @@
 import React, { useState, useEffect } from 'react';
 
-function SalesForm() {
-    const [price, setPrice] = useState('');
-    const [autovins, setAutovins] = useState([]);
-    const [salesPeople, setSalesPeople] = useState([]);
+function SalesForm({ getSales }) {
+    const [automobiles, setAutomobiles] = useState([]);
+    const [salespeople, setSalespeople] = useState([]);
     const [customers, setCustomers] = useState([]);
-    const [autovin, setAutovin] = useState('');
-    const [salesPerson, setSalesPerson] = useState('');
+    const [automobile, setAutomobile] = useState('');
+    const [salesperson, setSalesperson] = useState('');
     const [customer, setCustomer] = useState('');
+    const [price, setPrice] = useState('');
 
-
-    async function handleSubmit(event) {
-        event.preventDefault();
-        const data = {}
-        data.price = price;
-        data.automobile = autovin;
-        data.customer = customer;
-        data.salesperson = salesPerson;
-
-        console.log("data dictionary before fetch: ", data);
-        const salesUrl = 'http://localhost:8090/api/sales/';
-        const fetchConfig = {
-            method: "post",
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        };
-        const response = await fetch(salesUrl, fetchConfig);
-        console.log("Sales Response after fetch: ", response);
-        if (response.ok) {
-            const newSale = await response.json();
-            console.log("Await Response.json() returns newSale: ", newSale)
-
-            setAutovin('');
-            setPrice('');
-            setCustomer('');
-            setSalesPerson('');
-            window.location.reload();
-        }
-    }
-
-    const handleAutovinChange = (event) => {
-      setAutovin(event.target.value);
-    }
-
-    const handleSalesPersonChange = (event) => {
-      setSalesPerson(event.target.value);
-    }
-
-    const handleCustomerChange = (event) => {
-      setCustomer(event.target.value);
-    }
-
-    const handlePriceChange = (event) => {
-      setPrice(event.target.value);
-    }
 
     async function getAutomobiles() {
-        const url = 'http://localhost:8090/api/automobiles/';
+        const url = 'http://localhost:8100/api/automobiles/';
         const response = await fetch(url);
         if (response.ok) {
           const data = await response.json();
-          setAutovins(data.available_autos);
+          setAutomobiles(data.automobiles);
         }
     }
 
@@ -80,16 +33,58 @@ function SalesForm() {
         const response = await fetch(url);
         if (response.ok) {
             const data = await response.json();
-            setSalesPeople(data.salespeople);
+            setSalespeople(data.salespeople);
         }
     }
 
     useEffect(() => {
-        getCustomers();
         getAutomobiles();
+        getCustomers();
         getSalespeople();
     }, [])
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const data = {}
+        data.automobile = automobile;
+        data.salesperson = salesperson;
+        data.customer = customer;
+        data.price = price;
+        const salesUrl = 'http://localhost:8090/api/sales/';
+        const fetchConfig = {
+            method: "post",
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        };
+        const response = await fetch(salesUrl, fetchConfig);
+        console.log("Sales Response after fetch: ", response);
+        if (response.ok) {
+            const newSale = await response.json();
+            console.log(newSale)
+            setAutomobile('');
+            setPrice('');
+            setCustomer('');
+            setSalesperson('');
+        }
+    }
+
+    const handleAutomobileChange = (event) => {
+      setAutomobile(event.target.value);
+    }
+
+    const handleSalespersonChange = (event) => {
+      setSalesperson(event.target.value);
+    }
+
+    const handleCustomerChange = (event) => {
+      setCustomer(event.target.value);
+    }
+
+    const handlePriceChange = (event) => {
+      setPrice(event.target.value);
+    }
 
     return  (
         <>
@@ -99,34 +94,23 @@ function SalesForm() {
                         <h1>Record a new sale</h1>
                         <form onSubmit={handleSubmit}>
                             <div className ="form-floating mb-3">
-                                <select
-                                onChange={handleAutovinChange}
-                                required
-                                value ={autovin}
-                                name="vin"
-                                id="vin"
-                                className="form-select"
-                                >
+                                <select onChange={handleAutomobileChange} value ={automobile}
+                                required type="text" name="automobile" id="automobile" className="form-select" >
                                 <option value=""> Choose an automobile VIN... </option>
-                                {autovins?.map(auto=>{
+                                {automobiles?.map(automobile => {
                                     return (
-                                        <option key={auto.vin} value={auto.vin}>
-                                            {auto.vin}
+                                        <option key={automobile.vin} value={automobile.vin}>
+                                            {automobile.vin}
                                         </option>
                                     );
                                 })}
                                 </select>
                             </div>
                             <div className ="form-floating mb-3">
-                                <select onChange={handleSalesPersonChange}
-                                value ={salesPerson}
-                                required
-                                name=""
-                                id="salesperson"
-                                className="form-select"
-                                >
+                                <select onChange={handleSalespersonChange} value ={salesperson}
+                                required type="text" name="salesperson" id="salesperson" className="form-select" >
                                     <option value="">Choose a salesperson</option>
-                                    {salesPeople?.map(salesperson => {
+                                    {salespeople?.map(salesperson => {
                                         return (
                                             <option key={salesperson.employee_id} value={salesperson.employee_id}>
                                                 {salesperson.first_name} {salesperson.last_name}
@@ -140,7 +124,7 @@ function SalesForm() {
                                     onChange={handleCustomerChange}
                                     value ={customer}
                                     required
-                                    name=""
+                                    name="customer"
                                     id="customer"
                                     className="form-select" >
                                     <option value="">Choose a customer...</option>
@@ -155,17 +139,18 @@ function SalesForm() {
                             </div>
                             <div className ="form-floating mb-3">
                                 <input onChange={handlePriceChange}
-                                value ={price}
-                                placeholder='Price'
-                                required
-                                type="text"
-                                name="price"
-                                id="price"
-                                className="form-control"
+                                    value ={price}
+                                    placeholder='Sale Price'
+                                    required
+                                    type="text"
+                                    name="price"
+                                    id="price"
+                                    className="form-control"
+                                    default="0"
                                 />
                                 <label htmlFor="price">Price...</label>
                             </div>
-                            <button type="submit" className="btn btn-primary">Create</button>
+                            <button type="submit" className="btn btn-outline-primary">Create</button>
                         </form>
                     </div>
                 </div>

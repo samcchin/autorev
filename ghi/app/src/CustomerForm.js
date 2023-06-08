@@ -29,7 +29,6 @@ function CustomerForm({getCustomers}) {
             setFirstName('');
             setAddress('');
             setPhoneNumber('');
-            window.location.reload();
         }
     }
 

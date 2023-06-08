@@ -441,7 +441,7 @@ For example, you would use the GET HTTP request to the URL http://localhost:8080
 
 
 **Finishing an appointment**
-To finish an appointment, you would use the PUT HTTP request to the URL http://localhost:8080/api/appointments/:d/finish.  Marking the status of an appointment as “finished” requires the ID of an appointment in the URL, along with the status set to “finished” in the JSON body. It will return the details of the specified appointment and the assigned technician, and it will set the status of the appointment to “finished”.
+To finish an appointment, you would use the PUT HTTP request to the URL http://localhost:8080/api/appointments/:id/finish.  Marking the status of an appointment as “finished” requires the ID of an appointment in the URL, along with the status set to “finished” in the JSON body. It will return the details of the specified appointment and the assigned technician, and it will set the status of the appointment to “finished”.
 
 For example, you would use the GET HTTP request to the URL http://localhost:8080/api/appointments/2/finish to set the status of appointment 2, to “finished”.
 ```

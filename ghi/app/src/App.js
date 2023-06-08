@@ -159,7 +159,7 @@ function App() {
           </Route>
           <Route path="sales">
             <Route index element={<SalesList sales={sales}/>}/>
-            <Route path="new" element={<SalesForm getSales={getSales} />}/>
+            <Route path="new" element={<SalesForm />}/>
             <Route path="history" element={<SalespersonHistory sales={sales} />}/>
           </Route>
           <Route path="technicians">

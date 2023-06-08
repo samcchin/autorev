@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function ServiceHistory({appointments}){
+function ServiceHistory({appointments, automobiles}){
   const [searchVin, setSearchVin] = useState('');
   const [searchClick, setSearchClick] = useState(false)
 
@@ -15,6 +15,16 @@ function ServiceHistory({appointments}){
   const handleVinSearch = (event) => {
     setSearchVin(event.target.value)
   }
+
+  function vipStatusCheck(appointment) {
+    for (let automobile of automobiles) {
+        if (automobile.vin === appointment.vin && automobile.sold === true) {
+            return "VIP";
+        }
+    }
+    return "Not VIP";
+  };
+
 
   const filteredAppointments = searchClick?
     appointments.filter(appointment =>
@@ -37,12 +47,12 @@ function ServiceHistory({appointments}){
         <thead>
           <tr>
             <th>VIN</th>
-            <th>Is VIP?</th>
+            <th>VIP Status</th>
             <th>Customer</th>
             <th>Date & Time</th>
             <th>Technician</th>
             <th>Reason</th>
-            <th>Status</th>
+            <th>Appointment Status</th>
           </tr>
         </thead>
         <tbody>
@@ -59,7 +69,7 @@ function ServiceHistory({appointments}){
             return (
               <tr key={appointment.id}>
                 <td>{appointment.vin}</td>
-                <td>{appointment.vip_status ? "Yes":"No"}</td>
+                <td>{vipStatusCheck(appointment)}</td>
                 <td>{appointment.customer}</td>
                 <td>{formattedDateTime}</td>
                 <td>{`${appointment.technician.first_name} ${appointment.technician.last_name}`}</td>

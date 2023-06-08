@@ -13,9 +13,10 @@ Team:
 
 
 ## Getting Started
-1. Clone the repository by running the following command in your Terminal:
+**Note:** Docker, Git and Node.js must be up to date
+1. Fork this repository and clone the forked repository by running the following command in your Terminal:
 ```
-git clone https://gitlab.com/benjaminostler/project-beta.git
+git clone <<gitlab-url-to-forked-repository-name-here>
 ```
 
 2. After cloning the repository, set up the docker containers and volume by running these commands, while you are in the correct project directory:
@@ -26,7 +27,7 @@ docker-compose up
 ```
 Note: When you run docker-compose up and if you're on macOS, you will see a warning about an environment variable named OS being missing. You can safely ignore this.
 
-3.  You will be able to access the webpage on your browser at localhost:3000. In addition, the following ports for each of the APIs are below:
+3. Once the Docker containers are running, you will be able to access the webpage on your browser at http://localhost:3000/. In addition, the following ports for each of the APIs are below:
 
 Ports|URL
 --- | ---
@@ -58,7 +59,7 @@ From Insomnia and your browser, you can access the manufacturer model endpoints 
 
 **Creating a manufacturer**
 To create a manufacturer, you would use the POST HTTP request to the URL http://localhost:8100/api/manufacturers/. Creating a manufacturer requires only the manufacturer's name. The return value of creating a single manufacturer is its name, href, and id.
-```
+```json
 {
   "name": "Chrysler"
 }
@@ -66,7 +67,7 @@ To create a manufacturer, you would use the POST HTTP request to the URL http://
 
 **Updating a manufacturer**
 To update a manufacturer, you would use the manufacturer’s id to reference the specific manufacturer that you want to update. For example, you would use the PUT HTTP request to the URL http://localhost:8100/api/manufacturers/1/ to update the details for the manufacturer with the id of 1. Updating a manufacturer requires only the manufacturer's name. The return value of updating a single manufacturer is its name, href, and id.
-```
+```json
 {
   "name": "Chrysler"
 }
@@ -95,7 +96,7 @@ From Insomnia and your browser, you can access the vehicle model endpoints at th
 
 **Creating a vehicle model**
 To create a vehicle model, you would use the POST HTTP request to the URL http://localhost:8100/api/models/. When you create a vehicle model, it requires the model name, a URL of an image, and the id of the manufacturer.
-```
+```json
 {
   "name": "Sebring",
   "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg",
@@ -106,7 +107,7 @@ To create a vehicle model, you would use the POST HTTP request to the URL http:/
 **Updating a vehicle model**
 To update a vehicle model, you would use the vehicle model’s id to reference the specific model that you want to update. For example, you would use the PUT HTTP request to the URL http://localhost:8100/api/models/1/ to update the details for the vehicle model with the id of 1.
 When you update a vehicle model, it can take the name and/or the picture URL. It is not possible to update a vehicle model's manufacturer.
-```
+```json
 {
   "name": "Sebring",
   "picture_url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Chrysler_Sebring_front_20090302.jpg/320px-Chrysler_Sebring_front_20090302.jpg"
@@ -118,7 +119,7 @@ To get the details of a specific vehicle model, you would use the vehicle model�
 
 
 Getting the detail of a vehicle model, or the return value from creating or updating a vehicle model, returns the model's information and the manufacturer's information.
-```
+```json
 {
   "href": "/api/models/1/",
   "id": 1,
@@ -135,7 +136,7 @@ Getting the detail of a vehicle model, or the return value from creating or upda
 
 **Getting a list of vehicle models**
 To get a list of vehicle models, you would use the GET HTTP request to the URL http://localhost:8100/api/models/.This returns an object with the key "models" and a value of the list of models.
-```
+```json
 {
   "models": [
     {
@@ -153,7 +154,7 @@ To get a list of vehicle models, you would use the GET HTTP request to the URL h
       "href": "/api/models/2/",
       "id": 3,
       "name": "Mustang",
-      "picture_url": ""https://www.ford.com/is/image/content/dam/vdm_ford/live/en_us/ford/nameplate/mustang/2023/collections/dm/22_FRD_MST_55079_C7447317_MUST_GT_Prem_34FrntPassMotnRain_mj.tif?croppathe=1_16x9&wid=900",
+      "picture_url": "https://www.ford.com/is/image/content/dam/vdm_ford/live/en_us/ford/nameplate/mustang/2023/collections/dm/22_FRD_MST_55079_C7447317_MUST_GT_Prem_34FrntPassMotnRain_mj.tif?croppathe=1_16x9&wid=900",
       "manufacturer": {
         "href": "/api/manufacturers/2/",
         "id": 2,
@@ -181,7 +182,7 @@ Note: The identifiers for automobiles in this API are not integer ids. They are 
 
 **Creating an automobile**
 To create an automobile, you would use the POST HTTP request to the URL http://localhost:8100/api/automobiles/. When you create an automobile, it requires the color, year, VIN, and the id of the vehicle model.
-```
+```json
 {
   "color": "red",
   "year": 2012,
@@ -193,7 +194,7 @@ To create an automobile, you would use the POST HTTP request to the URL http://l
 **Updating an automobile**
 To update an automobile, you would use the car’s VIN to reference the specific car that you want to update. For example, you would use the PUT HTTP request to the URL http://localhost:8100/api/automobiles/1C3CC5FB2AN120174/ to update the details for the car with the VIN “1C3CC5FB2AN120174”.
 You can update the color, year, and sold status of an automobile.
-```
+```json
 {
   "color": "red",
   "year": 2012,
@@ -203,7 +204,7 @@ You can update the color, year, and sold status of an automobile.
 
 **Getting the detail of an automobile**
 To get the details of a specific automobile, you would use the car’s VIN to reference the car. For example, you would use the GET HTTP request to the URL http://localhost:8100/api/automobiles/1C3CC5FB2AN120174/ to retrieve the details for the car with the VIN “1C3CC5FB2AN120174”. The details for an automobile include its model and manufacturer.
-```
+```json
 {
   "href": "/api/automobiles/1C3CANG4120174/",
   "id": 1,
@@ -229,7 +230,7 @@ To get the details of a specific automobile, you would use the car’s VIN to re
 **Getting a list of automobiles**
 To get a list of automobiles, you would use the GET HTTP request to the URL  http://localhost:8100/api/automobiles/.Getting a list of automobiles returns a dictionary with the key "autos" set to a list of automobile information.
 
-```
+```json
 {
   "autos": [
     {
@@ -304,7 +305,7 @@ From Insomnia and your browser, you can access the Technician model endpoints at
 
 **Creating a technician**
 To create a technician, you would use the POST HTTP request to the URL http://localhost:8080/api/technicians/. Creating a technician requires the technician’s first name, last name and employee ID. The employee ID is based on the initial of the first name and full last name. The return value of creating a single manufacturer is its first name, last name and employee ID.
-```
+```json
 {
   "first_name": "Matthew",
   "last_name": "Campbell",
@@ -314,8 +315,8 @@ To create a technician, you would use the POST HTTP request to the URL http://lo
 
 
 **Getting a list of technicians**
-To get a list of technicians, you would use the GET HTTP request to the URL http://localhost:8080/api/technicians/.The list of technicians is an object with the key "technicians" set to a list of technicians.
-```
+To get a list of technicians, you would use the GET HTTP request to the URL http://localhost:8080/api/technicians/. The list of technicians is an object with the key "technicians" set to a list of technicians.
+```json
 {
 "technicians": [
 		{
@@ -340,7 +341,7 @@ To get a list of technicians, you would use the GET HTTP request to the URL http
 
 **Deleting a technician**
 To remove a technician, you would use the DELETE HTTP request to the URL http://localhost:8080/api/technicians/id. Deleting a technician requires the ID of a technician. Upon deletion, the response will read as the following:
-```
+```json
 {
 	"deleted": true
 }
@@ -378,7 +379,7 @@ From Insomnia and your browser, you can access the Technician model endpoints at
 
 **Creating an appointment**
 To create an appointment, you would use the POST HTTP request to the URL  http://localhost:8080/api/appointments/. Creating an appointment requires the car’s VIN, the customer name, the date & time, the technician (selected from a dropdown - based on the technician model), and the reason for the appointment. The return value of creating an appointment will be the details entered, along with the technician's details.
-```
+```json
 {
 	"vin":"WBAPH5G51BNM76282",
 	"customer": "Sam Chin",
@@ -392,7 +393,7 @@ To create an appointment, you would use the POST HTTP request to the URL  http:/
 
 **Getting a list of appointments**
 To get a list of appointments, you would use the GET HTTP request to the URL http://localhost:8080/api/appointments/.The list of appointments is an object with the key "appointments" set to a list of appointments.
-```
+```json
 {
 	"appointments": [
 		{
@@ -421,7 +422,7 @@ To get a list of appointments, you would use the GET HTTP request to the URL htt
 
 **Deleting an appointment**
 To remove an appointment, you would use the DELETE HTTP request to the URL http://localhost:8080/api/appointments/:id. Deleting a technician requires the ID of an appointment. Upon deletion, the response will read as the following:
-```
+```json
 {
 	"deleted": true
 }
@@ -432,10 +433,10 @@ To remove an appointment, you would use the DELETE HTTP request to the URL http:
 To cancel an appointment, you would use the PUT HTTP request to the URL http://localhost:8080/api/appointments/:id/cancel. Canceling an appointment requires the ID of an appointment in the URL, along with the status set to “canceled” in the JSON body. It will return the details of the specified appointment and the assigned technician, and it will set the status of the appointment to “canceled”.
 
 For example, you would use the GET HTTP request to the URL http://localhost:8080/api/appointments/2/cancel to set the status of appointment 2, to canceled.
-```
-	{
-			"status": "canceled"
-	}
+```json
+{
+	"status": "canceled"
+}
 
 ```
 
@@ -444,10 +445,10 @@ For example, you would use the GET HTTP request to the URL http://localhost:8080
 To finish an appointment, you would use the PUT HTTP request to the URL http://localhost:8080/api/appointments/:id/finish.  Marking the status of an appointment as “finished” requires the ID of an appointment in the URL, along with the status set to “finished” in the JSON body. It will return the details of the specified appointment and the assigned technician, and it will set the status of the appointment to “finished”.
 
 For example, you would use the GET HTTP request to the URL http://localhost:8080/api/appointments/2/finish to set the status of appointment 2, to “finished”.
-```
-	{
-			"status": "finished"
-	}
+```json
+{
+	"status": "finished"
+}
 
 
 ```
@@ -469,6 +470,9 @@ A form that allows a service concierge to enter the VIN of the vehicle, the cust
 **Service History**
 A page that shows the history of all service appointments— both current and canceled or finished. Additionally, it allows for the searching of a particular VIN.
    * Someone can type in the VIN and click “Search”. On form submission, it displays the filtered list of service appointments to include the vehicle's VIN, the appointment's VIP status, the customer's name, the date and time of the appointment, the assigned technician's name, the reason for the service, and the status of the service appointment (either "created", "canceled", or "finished").
+
+
+
 
 
 

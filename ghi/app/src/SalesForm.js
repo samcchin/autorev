@@ -128,7 +128,7 @@ function SalesForm() {
                                     <option value="">Choose a salesperson</option>
                                     {salesPeople?.map(salesperson => {
                                         return (
-                                            <option key={salesperson.employee_id} value={salesperson.employee_id}>
+                                            <option key={salesperson.employee_id} value={salesperson.id}>
                                                 {salesperson.first_name} {salesperson.last_name}
                                             </option>
                                         );

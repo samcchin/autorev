@@ -59,7 +59,7 @@ function App() {
     const response = await fetch(url);
     if (response.ok){
       const data = await response.json();
-      setAutomobiles(data.automobiles);
+      setAutomobiles(data.autos);
     } else {
       console.error(response);
     }
@@ -130,7 +130,6 @@ function App() {
     getTechnicians();
     getAppointments();
   }, []);
-
   return (
     <BrowserRouter>
       <Nav />

@@ -13,20 +13,20 @@ from .models import Automobile, Manufacturer, VehicleModel
 @require_http_methods(["GET", "POST"])
 def api_automobiles(request):
     if request.method == "GET":
-        automobiles = Automobile.objects.all()
+        autos = Automobile.objects.all()
         return JsonResponse(
-            {"automobiles": automobiles},
+            {"autos": autos},
             encoder=AutomobileEncoder,
         )
-    else:  # POST
+    else:
         try:
             content = json.loads(request.body)
             model_id = content["model_id"]
             model = VehicleModel.objects.get(pk=model_id)
             content["model"] = model
-            automobile = Automobile.objects.create(**content)
+            auto = Automobile.objects.create(**content)
             return JsonResponse(
-                automobile,
+                auto,
                 encoder=AutomobileEncoder,
                 safe=False,
             )
@@ -42,9 +42,9 @@ def api_automobiles(request):
 def api_automobile(request, vin):
     if request.method == "GET":
         try:
-            automobile = Automobile.objects.get(vin=vin)
+            auto = Automobile.objects.get(vin=vin)
             return JsonResponse(
-                automobile,
+                auto,
                 encoder=AutomobileEncoder,
                 safe=False
             )
@@ -54,27 +54,27 @@ def api_automobile(request, vin):
             return response
     elif request.method == "DELETE":
         try:
-            automobile = Automobile.objects.get(vin=vin)
-            automobile.delete()
+            auto = Automobile.objects.get(vin=vin)
+            auto.delete()
             return JsonResponse(
-                automobile,
+                auto,
                 encoder=AutomobileEncoder,
                 safe=False,
             )
         except Automobile.DoesNotExist:
             return JsonResponse({"message": "Does not exist"})
-    else:  # PUT
+    else: # PUT
         try:
             content = json.loads(request.body)
-            automobile = Automobile.objects.get(vin=vin)
+            auto = Automobile.objects.get(vin=vin)
 
             props = ["color", "year", "sold"]
             for prop in props:
                 if prop in content:
-                    setattr(automobile, prop, content[prop])
-            automobile.save()
+                    setattr(auto, prop, content[prop])
+            auto.save()
             return JsonResponse(
-                automobile,
+                auto,
                 encoder=AutomobileEncoder,
                 safe=False,
             )

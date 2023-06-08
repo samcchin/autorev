@@ -171,7 +171,7 @@ function App() {
             <Route path="new" element={<TechnicianForm getTechnicians={getTechnicians} />}/>
           </Route>
           <Route path="appointments">
-            <Route index element={<ServiceAppointmentList appointments={appointments}/>}/>
+            <Route index element={<ServiceAppointmentList getAppointments={getAppointments} automobiles={automobiles} appointments={appointments}/>}/>
             <Route path="new" element={<ServiceAppointmentForm getAppointments={getAppointments}/>}/>
             <Route path="history" element={<ServiceHistory appointments={appointments}/>}/>
           </Route>

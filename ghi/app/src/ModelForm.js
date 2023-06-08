@@ -22,7 +22,6 @@ function ModelForm({ getModels }){
   const handleSubmit = async (event)=>{
     event.preventDefault();
     const data = {};
-    console.log(data);
     data.name = name;
     data.picture_url = pictureUrl;
     data.manufacturer_id = manufacturer;

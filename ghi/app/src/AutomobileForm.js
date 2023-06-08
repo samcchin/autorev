@@ -41,7 +41,6 @@ function AutomobileForm({ getAutomobiles }){
       const newAutomobile = await response.json();
       console.log(newAutomobile)
       getAutomobiles();
-
       setColor('');
       setYear('');
       setVin('');

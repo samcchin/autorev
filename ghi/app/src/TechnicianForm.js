@@ -8,7 +8,6 @@ function TechnicianForm(models){
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = {};
-        console.log(data)
         data.first_name = firstName;
         data.last_name = lastName;
         data.employee_id = employeeId;
@@ -22,7 +21,6 @@ function TechnicianForm(models){
           },
         };
         const response = await fetch(technicianUrl, fetchConfig);
-        console.log(response)
         if (response.ok) {
           const newTechnician = await response.json();
           console.log(newTechnician)

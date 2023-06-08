@@ -6,7 +6,6 @@ function ManufacturerForm(){
     const handleSubmit = async (event)=>{
         event.preventDefault();
         const data = {};
-        console.log(data);
         data.name = manufacturerName;
 
         const manufacturerUrl = 'http://localhost:8100/api/manufacturers/'
@@ -18,7 +17,6 @@ function ManufacturerForm(){
             }
         }
         const response = await fetch(manufacturerUrl, fetchConfig);
-        console.log(response);
         if (response.ok){
             const newManufacturer = await response.json();
             console.log(newManufacturer);

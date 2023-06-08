@@ -26,7 +26,12 @@ function ServiceAppointmentForm(){
         const data = {};
         data.vin = vin;
         data.customer = customer;
-        data.date_time = dateTime;
+
+        const utcDateTime = new Date(dateTime);
+        const ptDateTime = new Date(utcDateTime.toLocaleString("en-US", { timeZone: "America/Los_Angeles" }));
+
+        data.date_time = ptDateTime.toISOString(); // Use the PT date and time
+
         data.technician = technician;
         data.reason = reason;
 

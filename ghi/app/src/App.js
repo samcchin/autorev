@@ -88,14 +88,10 @@ function App() {
   }
 
   async function getSales(){
-    console.log("running getSales()")
     const url = 'http://localhost:8090/api/sales/'
     const response = await fetch(url);
-    console.log("response from getsales fetch: ", response);
     if (response.ok){
-      console.log("response was ok.")
       const data = await response.json();
-      console.log("data returned from await response.json(): ", data);
       setSales(data.sales);
     } else {
       console.error(response);

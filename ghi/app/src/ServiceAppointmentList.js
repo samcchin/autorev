@@ -23,7 +23,7 @@ function ServiceAppointmentList({appointments, getAppointments}){
     }
 
     const filteredAppointments = appointments.filter(
-      appointment => appointment.status !== "completed" && appointment.status !== "canceled"
+      appointment => appointment.status !== "finished" && appointment.status !== "canceled"
     );
 
     return (
@@ -49,12 +49,11 @@ function ServiceAppointmentList({appointments, getAppointments}){
                 day: 'numeric',
                 hour: 'numeric',
                 minute: 'numeric',
-                hour12: true,
-                timeZone: "America/Los_Angeles"
+                hour12: true
               });
 
-              const handleCompletedAppointment = () => {
-                updateAppointmentStatus(appointment.id, "completed")
+              const handleFinishedAppointment = () => {
+                updateAppointmentStatus(appointment.id, "finished")
               };
 
               const handleCanceledAppointment = () => {
@@ -71,8 +70,8 @@ function ServiceAppointmentList({appointments, getAppointments}){
                   <td>{appointment.reason}</td>
                   <td></td>
                   <td>
-                    {appointment.status !== "completed" && (
-                    <button type="button" className="btn btn-success" onClick={handleCompletedAppointment}>Completed</button>)}
+                    {appointment.status !== "finished" && (
+                    <button type="button" className="btn btn-success" onClick={handleFinishedAppointment}>Finished</button>)}
                     {appointment.status !== "canceled" && (
                     <button className="btn btn-danger" onClick={handleCanceledAppointment}>Canceled</button>)}
                   </td>

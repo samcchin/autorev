@@ -173,7 +173,7 @@ function App() {
           <Route path="appointments">
             <Route index element={<ServiceAppointmentList getAppointments={getAppointments} automobiles={automobiles} appointments={appointments}/>}/>
             <Route path="new" element={<ServiceAppointmentForm getAppointments={getAppointments}/>}/>
-            <Route path="history" element={<ServiceHistory appointments={appointments}/>}/>
+            <Route path="history" element={<ServiceHistory appointments={appointments} automobiles={automobiles}/>}/>
           </Route>
         </Routes>
       </div>

@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 
 function ServiceAppointmentList({appointments, automobiles, getAppointments}){
+
     const [filteredAppointments, setFilteredAppointments] = useState([]);
+
 
     useEffect(() => {
       const filtered = appointments.filter(
@@ -12,8 +14,18 @@ function ServiceAppointmentList({appointments, automobiles, getAppointments}){
 
 
     if (!appointments || !Array.isArray(appointments)){
-        return null;
+      return null;
     }
+
+    function vipStatusCheck(appointment) {
+      for (let automobile of automobiles) {
+          if (automobile.vin === appointment.vin && automobile.sold === true) {
+              return "VIP";
+          }
+      }
+      return "Not VIP";
+    };
+
 
     const updateAppointmentStatus = async (appointmentId, status) => {
       const appointmentUrl = `http://localhost:8080/api/appointments/${appointmentId}/`;
@@ -37,12 +49,12 @@ function ServiceAppointmentList({appointments, automobiles, getAppointments}){
           <thead>
             <tr>
               <th>VIN</th>
-              <th>Is VIP?</th>
+              <th>VIP Status</th>
               <th>Customer</th>
               <th>Date & Time</th>
               <th>Technician</th>
               <th>Reason</th>
-
+              <th>Update Appointment Status</th>
             </tr>
           </thead>
           <tbody>
@@ -68,12 +80,11 @@ function ServiceAppointmentList({appointments, automobiles, getAppointments}){
               return (
                 <tr key={appointment.id}>
                   <td>{appointment.vin}</td>
-                  <td>{appointment.vin ? "Yes":"No"}</td>
+                  <td>{vipStatusCheck(appointment)}</td>
                   <td>{appointment.customer}</td>
                   <td>{formattedDateTime}</td>
                   <td>{`${appointment.technician.first_name} ${appointment.technician.last_name}`}</td>
                   <td>{appointment.reason}</td>
-                  <td></td>
                   <td>
                     {appointment.status !== "finished" && (
                     <button type="button" className="btn btn-success" onClick={() => handleFinishedAppointment(appointment.id)}>Finished</button>)}

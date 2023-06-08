@@ -40,8 +40,8 @@ class SaleEncoder(ModelEncoder):
     model = Sale
     properties = [
         "id",
-        "price",
         "automobile",
+        "price",
         "salesperson",
         "customer",
     ]
@@ -133,21 +133,39 @@ def api_sales(request):
             encoder=SaleEncoder,
         )
     else:  # POST
+        content = json.loads(request.body)
         try:
-            content = json.loads(request.body)
-            sale = Sale.objects.create(**content)
-            return JsonResponse(
-                sale,
-                encoder=SaleEncoder,
-                safe=False,
-            )
-        except:
-            response = JsonResponse(
-                {"message": "Could not create the sale"}
-            )
-            response.status_code = 400
-            return response
+            vin = content["automobile"]
+            automobile = AutomobileVO.objects.get(vin=vin)
+            content["automobile"] = automobile
+            employee_id = content["salesperson"]
+            salesperson = Salesperson.objects.get(id=employee_id)
+            content["salesperson"] = salesperson
+            customer_id = content["customer"]
+            customer = Customer.objects.get(id=customer_id)
+            content["customer"] = customer
 
+        except AutomobileVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Automobile does not exist "},
+                status=400
+            )
+        except Salesperson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Salesperson does not exist "},
+                status=400
+            )
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Salesperson does not exist "},
+                status=400
+            )
+        sale = Sale.objects.create(**content)
+        return JsonResponse(
+            sale,
+            encoder=SaleEncoder,
+            safe=False,
+        )
 
 @require_http_methods(["DELETE", "GET", "PUT"])
 def api_sale(request, pk):

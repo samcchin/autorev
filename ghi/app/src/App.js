@@ -22,8 +22,7 @@ import ServiceAppointmentForm from './ServiceAppointmentForm';
 import ServiceHistory from './ServiceHistory';
 
 
-function App(props) {
-  console.log("props from app.js, which is not called at any point: ", props);
+function App() {
   const [manufacturers, setManufacturers] = useState([]);
   const [models, setModels] = useState([]);
   const [automobiles, setAutomobiles] = useState([]);

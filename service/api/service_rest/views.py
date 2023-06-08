@@ -217,6 +217,7 @@ def api_finish_appointment(request, pk):
                 appointment,
                 encoder=AppointmentEncoder,
                 safe=False
+                
             )
         except Appointment.DoesNotExist:
             response = JsonResponse({"message": "Appointment does not exist"})

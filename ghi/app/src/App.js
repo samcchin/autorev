@@ -22,8 +22,7 @@ import ServiceAppointmentForm from './ServiceAppointmentForm';
 import ServiceHistory from './ServiceHistory';
 
 
-function App(props) {
-  console.log("props from app.js, which is not called at any point: ", props);
+function App() {
   const [manufacturers, setManufacturers] = useState([]);
   const [models, setModels] = useState([]);
   const [automobiles, setAutomobiles] = useState([]);
@@ -60,7 +59,7 @@ function App(props) {
     const response = await fetch(url);
     if (response.ok){
       const data = await response.json();
-      setAutomobiles(data.automobiles);
+      setAutomobiles(data.autos);
     } else {
       console.error(response);
     }
@@ -92,11 +91,11 @@ function App(props) {
     console.log("running getSales()")
     const url = 'http://localhost:8090/api/sales/'
     const response = await fetch(url);
-    console.log("response from getsales fetch: ", response);
+    // console.log("response from getsales fetch: ", response);
     if (response.ok){
-      console.log("response was ok.")
+      console.log("response from getsales fetch was ok.")
       const data = await response.json();
-      console.log("data returned from await response.json(): ", data);
+      // console.log("data returned from await response.json(): ", data);
       setSales(data.sales);
     } else {
       console.error(response);
@@ -135,7 +134,6 @@ function App(props) {
     getTechnicians();
     getAppointments();
   }, []);
-
   return (
     <BrowserRouter>
       <Nav />
@@ -164,7 +162,7 @@ function App(props) {
           </Route>
           <Route path="sales">
             <Route index element={<SalesList sales={sales}/>}/>
-            <Route path="new" element={<SalesForm getSales={getSales} />}/>
+            <Route path="new" element={<SalesForm/>}/>
             <Route path="history" element={<SalespersonHistory sales={sales} />}/>
           </Route>
           <Route path="technicians">

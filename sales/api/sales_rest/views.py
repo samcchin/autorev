@@ -2,6 +2,7 @@ from common.json import ModelEncoder
 from django.http import JsonResponse
 from django.views.decorators.http import require_http_methods
 import json
+from django.shortcuts import render
 
 from .models import AutomobileVO, Salesperson, Sale, Customer
 
@@ -9,7 +10,6 @@ from .models import AutomobileVO, Salesperson, Sale, Customer
 class AutomobileVOEncoder(ModelEncoder):
     model = AutomobileVO
     properties = [
-        "id",
         "vin",
         "sold",
     ]
@@ -18,21 +18,21 @@ class AutomobileVOEncoder(ModelEncoder):
 class SalespersonEncoder(ModelEncoder):
     model = Salesperson
     properties = [
-        "id",
         "first_name",
         "last_name",
         "employee_id",
+        "id",
     ]
 
 
 class CustomerEncoder(ModelEncoder):
     model = Customer
     properties = [
-        "id",
         "first_name",
         "last_name",
         "address",
         "phone_number",
+        "id",
     ]
 
 
@@ -47,9 +47,9 @@ class SaleEncoder(ModelEncoder):
     ]
 
     encoders = {
-        "automobile": AutomobileVOEncoder,
-        "salesperson": SalespersonEncoder,
-        "customer": CustomerEncoder,
+        "automobile": AutomobileVOEncoder(),
+        "salesperson": SalespersonEncoder(),
+        "customer": CustomerEncoder(),
     }
 
 
@@ -61,7 +61,7 @@ def api_salespeople(request):
             {"salespeople": salespeople},
             encoder=SalespersonEncoder,
         )
-    else:
+    else:   # POST
         try:
             content = json.loads(request.body)
             salesperson = Salesperson.objects.create(**content)
@@ -131,25 +131,58 @@ def api_sales(request):
         return JsonResponse(
             {"sales": sales},
             encoder=SaleEncoder,
+            safe=False,
         )
-    else:  # POST
+    else:
+        content = json.loads(request.body)
         try:
-            content = json.loads(request.body)
-            sale = Sale.objects.create(**content)
+            print("content from json.loads", content)
+            vin = content["automobile"]
+            automobile = AutomobileVO.objects.get(vin=vin)
+            print("automobile retrieved as matching vin:", automobile)
+            if automobile.sold:
+                return JsonResponse(
+                    {"message": "This automobile has been sold already!"}
+                )
+            else:
+                automobile.sold = True
+                automobile.save()
+                content["automobile"] = automobile
+        except AutomobileVO.DoesNotExist:
             return JsonResponse(
-                sale,
-                encoder=SaleEncoder,
-                safe=False,
+                {"message": "Invalid vin number"},
+                status=400,
             )
-        except:
-            response = JsonResponse(
-                {"message": "Could not create the sale"}
+
+        try:
+            salesperson_id = content["salesperson"]
+            salesperson = Salesperson.objects.get(id=salesperson_id)
+            content["salesperson"] = salesperson
+        except Salesperson.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid salesperson id"},
+                status=400,
             )
-            response.status_code = 400
-            return response
+
+        try:
+            customer_id = content["customer"]
+            customer = Customer.objects.get(id=customer_id)
+            content["customer"] = customer
+        except Customer.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid customer id"},
+                status=400,
+            )
+
+        sale = Sale.objects.create(**content)
+        return JsonResponse(
+            sale,
+            encoder=SaleEncoder,
+            safe=False,
+        )
 
 
-@require_http_methods(["DELETE", "GET", "PUT"])
+@require_http_methods(["DELETE", "GET"])
 def api_sale(request, pk):
     if request.method == "GET":
         try:
@@ -163,34 +196,18 @@ def api_sale(request, pk):
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
-    elif request.method == "DELETE":
+    else:
         try:
             sale = Sale.objects.get(id=pk)
+            automobile = AutomobileVO.objects.get(vin=sale.automobile.vin)
+            automobile.sold = False
+            automobile.save()
             sale.delete()
             return JsonResponse(
-                sale,
-                encoder=SaleEncoder,
-                safe=False,
+                {"message": "deleted"}
             )
         except Sale.DoesNotExist:
-            return JsonResponse({"message": "Does not exist"})
-    else:  # PUT
-        try:
-            content = json.loads(request.body)
-            sale = Sale.objects.get(id=pk)
-
-            props = ["name"]
-            for prop in props:
-                if prop in content:
-                    setattr(sale, prop, content[prop])
-            sale.save()
-            return JsonResponse(
-                sale,
-                encoder=SaleEncoder,
-                safe=False,
-            )
-        except Sale.DoesNotExist:
-            response = JsonResponse({"message": "Does not exist"})
+            response = JsonResponse({"message": "Invalid Sale ID"})
             response.status_code = 404
             return response
 
@@ -212,7 +229,7 @@ def api_customers(request):
                 encoder=CustomerEncoder,
                 safe=False,
             )
-        except:
+        except ValueError:
             response = JsonResponse(
                 {"message": "Could not create the customer"}
             )
@@ -264,3 +281,13 @@ def api_customer(request, pk):
             response = JsonResponse({"message": "Does not exist"})
             response.status_code = 404
             return response
+
+
+@require_http_methods(["GET"])
+def api_list_automobiles(request):
+    automobiles = AutomobileVO.objects.filter(sold=False)
+    return JsonResponse(
+        {"available_autos": automobiles},
+        encoder=AutomobileVOEncoder,
+        safe=False
+    )

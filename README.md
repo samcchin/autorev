@@ -301,6 +301,7 @@ From Insomnia and your browser, you can access the Technician model endpoints at
 | Create a technician		 |	POST	       |	http://localhost:8080/api/technicians/      |
 | Delete a specific technician	 |	DELETE       |	http://localhost:8080/api/technicians/:id  |
 
+
 **Creating a technician**
 To create a technician, you would use the POST HTTP request to the URL http://localhost:8080/api/technicians/. Creating a technician requires the technician’s first name, last name and employee ID. The employee ID is based on the initial of the first name and full last name. The return value of creating a single manufacturer is its first name, last name and employee ID.
 ```
@@ -310,6 +311,7 @@ To create a technician, you would use the POST HTTP request to the URL http://lo
   "employee_id": "mcampbell"
 }
 ```
+
 
 **Getting a list of technicians**
 To get a list of technicians, you would use the GET HTTP request to the URL http://localhost:8080/api/technicians/.The list of technicians is an object with the key "technicians" set to a list of technicians.
@@ -334,6 +336,8 @@ To get a list of technicians, you would use the GET HTTP request to the URL http
 }
 
 ```
+
+
 **Deleting a technician**
 To remove a technician, you would use the DELETE HTTP request to the URL http://localhost:8080/api/technicians/id. Deleting a technician requires the ID of a technician. Upon deletion, the response will read as the following:
 ```
@@ -341,6 +345,8 @@ To remove a technician, you would use the DELETE HTTP request to the URL http://
 	"deleted": true
 }
 ```
+
+
 
 
 **Front-end views**
@@ -383,6 +389,7 @@ To create an appointment, you would use the POST HTTP request to the URL  http:/
 
 ```
 
+
 **Getting a list of appointments**
 To get a list of appointments, you would use the GET HTTP request to the URL http://localhost:8080/api/appointments/.The list of appointments is an object with the key "appointments" set to a list of appointments.
 ```
@@ -411,6 +418,7 @@ To get a list of appointments, you would use the GET HTTP request to the URL htt
 
 ```
 
+
 **Deleting an appointment**
 To remove an appointment, you would use the DELETE HTTP request to the URL http://localhost:8080/api/appointments/:id. Deleting a technician requires the ID of an appointment. Upon deletion, the response will read as the following:
 ```
@@ -419,57 +427,33 @@ To remove an appointment, you would use the DELETE HTTP request to the URL http:
 }
 ```
 
+
 **Canceling an appointment**
-To cancel an appointment, you would use the PUT HTTP request to the URL http://localhost:8080/api/appointments/:id/cancel. Canceling an appointment requires the ID of an appointment. Upon cancelation, it will set the status of the appointment to “canceled”.
+To cancel an appointment, you would use the PUT HTTP request to the URL http://localhost:8080/api/appointments/:id/cancel. Canceling an appointment requires the ID of an appointment in the URL, along with the status set to “canceled” in the JSON body. It will return the details of the specified appointment and the assigned technician, and it will set the status of the appointment to “canceled”.
+
+For example, you would use the GET HTTP request to the URL http://localhost:8080/api/appointments/2/cancel to set the status of appointment 2, to canceled.
 ```
-{
-	"appointments": [
-		{
-			"href": "/api/appointments/2/",
-			"id": 2,
-			"date_time": "2023-06-09T08:09:00+00:00",
-			"reason": "Oil Change",
-			"status": "canceled",
-			"vin": "WBAPH5G51BNM76282",
-			"customer": "Sam Chin",
-			"technician": {
-				"href": "/api/technicians/6/",
-				"id": 6,
-				"first_name": "Oliver",
-				"last_name": "Vinluan",
-				"employee_id": "ovinluan"
-			},
-			"vip_status": false
-		}
-	]
-}
+	{
+			"status": "canceled"
+	}
+
 ```
 
-**Completing an appointment**
-To complete an appointment, you would use the PUT HTTP request to the URL http://localhost:8080/api/appointments/:d/finish. Completing an appointment requires the ID of an appointment. Upon completion, it will set the status of the appointment to “completed”.
+
+**Finishing an appointment**
+To finish an appointment, you would use the PUT HTTP request to the URL http://localhost:8080/api/appointments/:d/finish.  Marking the status of an appointment as “finished” requires the ID of an appointment in the URL, along with the status set to “finished” in the JSON body. It will return the details of the specified appointment and the assigned technician, and it will set the status of the appointment to “finished”.
+
+For example, you would use the GET HTTP request to the URL http://localhost:8080/api/appointments/2/finish to set the status of appointment 2, to “finished”.
 ```
-{
-	"appointments": [
-		{
-			"href": "/api/appointments/2/",
-			"id": 2,
-			"date_time": "2023-06-09T08:09:00+00:00",
-			"reason": "Oil Change",
-			"status": "completed",
-			"vin": "WBAPH5G51BNM76282",
-			"customer": "Sam Chin",
-			"technician": {
-				"href": "/api/technicians/6/",
-				"id": 6,
-				"first_name": "Oliver",
-				"last_name": "Vinluan",
-				"employee_id": "ovinluan"
-			},
-			"vip_status": false
-		}
-	]
-}
+	{
+			"status": "finished"
+	}
+
+
 ```
+
+
+
 
 **Front-end views**
 

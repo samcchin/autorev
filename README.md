@@ -477,7 +477,7 @@ A page that shows the history of all service appointments— both current and ca
 
 The back end of the sales microservice has 4 models: Customer, Salesperson, Sales, AutomobileVO. The Sales model gets data from the three other models and interacts with them.
 
-The AutomobileVO is a value object that gets data from the automobiles in the inventory using a poller. The sales poller polls the inventory microservice automatically for data, keeping the sales microservice up to date. This allows the selection of which car is being sold, and filtering which cars have already been sold.
+The AutomobileVO is a value object that gets data from the automobiles in the inventory using a poller. The sales poller polls the inventory microservice automatically for data, keeping the sales microservice up to date. This enables the user to select which car to be sold, having already filtered out the cars previously sold.
 
 
 ## Accessing Endpoints through Insomnia to Send and View Data:

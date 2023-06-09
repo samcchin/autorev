@@ -12,7 +12,7 @@ function Nav() {
         <ul className="navbar-nav">
           <li className="nav-item dropdown">
             <NavLink className="nav-link dropdown-toggle" to="/" id="navbarDarkDropdownManufacturerLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Manufacturer</NavLink>
+              Manufacturers</NavLink>
             <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownManufacturerLink">
               <li><NavLink className="dropdown-item" to="/manufacturers/">List of Manufacturers</NavLink></li>
               <li><NavLink className="dropdown-item" to="/manufacturers/new">Create a Manufacturer</NavLink></li>
@@ -84,6 +84,3 @@ function Nav() {
 }
 
 export default Nav;
-
-
-

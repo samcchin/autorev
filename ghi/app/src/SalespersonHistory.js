@@ -68,8 +68,8 @@ function SalespersonHistory(){
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>Sales Person Name</th>
-                        <th>Customer Name</th>
+                        <th>Salesperson</th>
+                        <th>Customer</th>
                         <th>Automobile VIN</th>
                         <th>Sale Price</th>
                     </tr>

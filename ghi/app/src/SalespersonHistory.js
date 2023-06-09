@@ -21,7 +21,7 @@ function SalespersonHistory(){
     }
 
     function filterData(){
-        const filtered = salesList.filter( sale => sale.salesperson.id === salesPerson);
+        const filtered = salesList.filter( sale => sale.salesperson.id == salesPerson);
         setFilteredList(filtered);
       }
 
@@ -37,7 +37,7 @@ function SalespersonHistory(){
         fetchData();
         SalesPeopleData();
     }, []);
-    
+
     useEffect(() => {
         filterData();
       }, [salesPerson]);
@@ -75,7 +75,7 @@ function SalespersonHistory(){
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredList?.map(sale => {
+                    {filteredList.map(sale => {
                         return (
                             <tr key={sale.id}>
                                 <td>{ sale.salesperson.first_name } { sale.salesperson.last_name }</td>

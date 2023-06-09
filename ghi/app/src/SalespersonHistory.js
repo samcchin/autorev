@@ -2,16 +2,16 @@ import { useState, useEffect } from "react";
 
 function SalespersonHistory(){
     const [salesList, setSalesList] = useState([]);
-    const [salesPersonList, setSalesPersonList] = useState([]);
+    const [salesPeopleList, SetSalesPeopleList] = useState([]);
     const [salesPerson, setSalesPerson] = useState('');
-    const [filteredList, setFilteredList] = useState([]);
+    const [filteredSalesList, setFilteredSalesList] = useState([]);
 
     async function handleSalesPersonChange(event){
         const value = event.target.value;
         setSalesPerson(value);
     }
 
-    async function fetchData() {
+    async function getSales() {
         const url = 'http://localhost:8090/api/sales/';
         const response = await fetch(url);
         if (response.ok) {
@@ -20,26 +20,26 @@ function SalespersonHistory(){
         }
     }
 
-    function filterData(){
+    function filterSales(){
         const filtered = salesList.filter( sale => sale.salesperson.id == salesPerson);
-        setFilteredList(filtered);
+        setFilteredSalesList(filtered);
       }
 
-    async function SalesPeopleData() {
+    async function getSalespeople() {
         const response = await fetch('http://localhost:8090/api/salespeople/');
         if (response.ok) {
             const data = await response.json();
-            setSalesPersonList(data.salespeople);
+            SetSalesPeopleList(data.salespeople);
         }
     }
 
     useEffect(() => {
-        fetchData();
-        SalesPeopleData();
+        getSales();
+        getSalespeople();
     }, []);
 
     useEffect(() => {
-        filterData();
+        filterSales();
       }, [salesPerson]);
 
 
@@ -56,10 +56,10 @@ function SalespersonHistory(){
                 className="form-select"
                 >
                     <option value="">Choose a salesperson</option>
-                    {salesPersonList?.map(salesper => {
+                    {salesPeopleList?.map(salesperson => {
                         return (
-                            <option key={salesper.employee_id} value={salesper.id}>
-                                {salesper.first_name} {salesper.last_name}
+                            <option key={salesperson.employee_id} value={salesperson.id}>
+                                {salesperson.first_name} {salesperson.last_name}
                             </option>
                         );
                     })}
@@ -75,7 +75,7 @@ function SalespersonHistory(){
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredList.map(sale => {
+                    {filteredSalesList.map(sale => {
                         return (
                             <tr key={sale.id}>
                                 <td>{ sale.salesperson.first_name } { sale.salesperson.last_name }</td>

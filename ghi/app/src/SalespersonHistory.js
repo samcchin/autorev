@@ -21,7 +21,7 @@ function SalespersonHistory(){
     }
 
     function filterData(){
-        const filtered = salesList.filter( sale => sale.salesperson.id == salesPerson);
+        const filtered = salesList.filter( sale => sale.salesperson.id === salesPerson);
         setFilteredList(filtered);
       }
 
@@ -37,9 +37,9 @@ function SalespersonHistory(){
         fetchData();
         SalesPeopleData();
     }, []);
-
+    
     useEffect(() => {
-        filterData()
+        filterData();
       }, [salesPerson]);
 
 

@@ -26,10 +26,24 @@ function SalesForm() {
                 'Content-Type': 'application/json',
             },
         };
+
+        const autoUrl = `http://localhost:8100/api/automobiles/${autovin}/`
+        const putConfig = {
+            method: "put",
+            body: JSON.stringify({sold: true}),
+            headers: {
+              'Content-Type':'application/json',
+            }
+          };
+        const auto_response = await fetch(autoUrl, putConfig);
+
         const response = await fetch(salesUrl, fetchConfig);
-        if (response.ok) {
+        if (response.ok && auto_response.ok) {
             const newSale = await response.json();
             console.log(newSale);
+
+            const updated_auto = await auto_response.json();
+            console.log(updated_auto)
 
             setAutovin('');
             setPrice('');

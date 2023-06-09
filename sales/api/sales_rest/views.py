@@ -136,10 +136,8 @@ def api_sales(request):
     else:
         content = json.loads(request.body)
         try:
-            print("content from json.loads", content)
             vin = content["automobile"]
             automobile = AutomobileVO.objects.get(vin=vin)
-            print("automobile retrieved as matching vin:", automobile)
             if automobile.sold:
                 return JsonResponse(
                     {"message": "This automobile has been sold already!"}

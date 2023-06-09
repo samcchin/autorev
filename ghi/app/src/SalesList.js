@@ -5,19 +5,19 @@ function SalesList({sales}){
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th>Salesperson Employee ID</th>
-                        <th>Salesperson Name</th>
-                        <th>Customer</th>
-                        <th>VIN</th>
-                        <th>Price</th>
+                        <th>Sales Person Name</th>
+                        <th>Employee Number</th>
+                        <th>Purchaser Name</th>
+                        <th>Automobile VIN</th>
+                        <th>Price of Sale</th>
                     </tr>
                 </thead>
                 <tbody>
                     {sales?.map(sale => {
                         return (
                             <tr key={sale.id}>
-                                <td>{ sale.salesperson.employee_id }</td>
                                 <td>{ sale.salesperson.first_name } { sale.salesperson.last_name }</td>
+                                <td>{ sale.salesperson.employee_id }</td>
                                 <td>{ sale.customer.first_name } { sale.customer.last_name }</td>
                                 <td>{ sale.automobile.vin }</td>
                                 <td>${ sale.price }</td>

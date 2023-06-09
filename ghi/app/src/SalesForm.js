@@ -18,7 +18,6 @@ function SalesForm() {
         data.customer = customer;
         data.salesperson = salesPerson;
 
-        console.log("data dictionary before fetch: ", data);
         const salesUrl = 'http://localhost:8090/api/sales/';
         const fetchConfig = {
             method: "post",
@@ -28,10 +27,9 @@ function SalesForm() {
             },
         };
         const response = await fetch(salesUrl, fetchConfig);
-        console.log("Sales Response after fetch: ", response);
         if (response.ok) {
             const newSale = await response.json();
-            console.log("Await Response.json() returns newSale: ", newSale)
+            console.log(newSale);
 
             setAutovin('');
             setPrice('');

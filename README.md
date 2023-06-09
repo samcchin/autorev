@@ -473,11 +473,177 @@ A page that shows the history of all service appointments— both current and ca
 
 
 
-
-
-
-
 ## Sales microservice
 
-Explain your models and integration with the inventory
-microservice, here.
+The back end of the sales microservice has 4 models: Customer, Salesperson, Sales, AutomobileVO. The Sales model gets data from the three other models and interacts with them.
+
+The AutomobileVO is a value object that gets data from the automobiles in the inventory using a poller. The sales poller polls the inventory microservice automatically for data, keeping the sales microservice up to date. This allows the selection of which car is being sold, and filtering which cars have already been sold.
+
+
+## Accessing Endpoints through Insomnia to Send and View Data:
+
+### Customers:
+
+
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List customers | GET | http://localhost:8090/api/customers/
+| Create a customer | POST | http://localhost:8090/api/customers/
+| Show a specific customer | GET | http://localhost:8090/api/customers/id/
+
+To create a Customer (SEND THIS JSON BODY):
+```
+{
+	"name": "John Johns",
+	"address": "1212 Ocean Street",
+	"phone_number": 9804357878
+}
+```
+Return Value of Creating a Customer:
+```
+{
+	"id: "1",
+	"name": "John Johns",
+	"address": "1212 Ocean Street",
+	"phone_number": 9804357878
+}
+```
+Return value of Listing all Customers:
+```
+{
+	"customers": [
+		{
+			"id",
+			"name": "Martha Stewart",
+			"address": "1313 Baker Street",
+			"phone_number": "980720890"
+		},
+		{
+			"id",
+			"name": "John Johns",
+			"address": "1212 Ocean Street",
+			"phone_number": "9804357878"
+		}
+	]
+}
+```
+### Salespeople:
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List salespeople | GET | http://localhost:8090/api/salespeople/
+| Salesperson details | GET | http://localhost:8090/api/salesperson/id/
+| Create a salesperson | POST | http://localhost:8090/api/salespeople/
+| Delete a salesperson | DELETE | http://localhost:8090/api/salesperson/id/
+
+
+To create a salesperson (SEND THIS JSON BODY):
+```
+{
+	"name": "Jane Doe",
+	"employee_number": 1
+}
+```
+Return Value of creating a salesperson:
+```
+{
+	"id": 1,
+	"name": "Liz",
+	"employee_number": 1
+}
+```
+List all salespeople Return Value:
+```
+{
+	"salespeople": [
+		{
+			"id": 1,
+			"name": "Jane Doe",
+			"employee_number": 1
+		}
+	]
+}
+```
+### Sales:
+- the id value to show a salesperson's Sales is the **"id" value tied to a salesperson.**
+
+| Action | Method | URL
+| ----------- | ----------- | ----------- |
+| List all Sales | GET | http://localhost:8090/api/Sales/
+| Create a new sale | POST | http://localhost:8090/api/Sales/
+| Show salesperson's Sales | GET | http://localhost:8090/api/Sales/id/
+
+List all Sales Return Value:
+```
+{
+	"sales": [
+		{
+			"id": 1,
+			"price": 111000,
+			"vin": {
+				"vin": "111"
+			},
+			"salesperson": {
+				"id": 1,
+				"name": "Liz",
+				"employee_number": 1
+			},
+			"customer": {
+				"name": "Martha Stewart",
+				"address": "1313 Baker Street",
+				"phone_number": "980720890"
+			}
+		}
+	]
+}
+```
+Create a New Sale (SEND THIS JSON BODY):
+```
+{
+	"salesperson": "Liz",
+	"customer": "John Johns",
+	"vin": "888",
+	"price": 40000
+}
+```
+Return Value of Creating a New Sale:
+```
+{
+	"id": 4,
+	"price": 40000,
+	"vin": {
+		"vin": "888"
+	},
+	"salesperson": {
+		"id": 1,
+		"name": "Liz",
+		"employee_number": 1
+	},
+	"customer": {
+		"id",
+		"name": "John Johns",
+		"address": "1212 Ocean Street",
+		"phone_number": "9804357878"
+	}
+}
+```
+Show a Salesperson's Sales Return Value:
+```
+{
+	"id": 1,
+	"price": 111000,
+	"vin": {
+		"vin": "111"
+	},
+	"salesperson": {
+		"id": 1,
+		"name": "Liz",
+		"employee_number": 1
+	},
+	"customer": {
+		"id",
+		"name": "Martha Stewart",
+		"address": "1313 Baker Street",
+		"phone_number": "980720890"
+	}
+}
+```

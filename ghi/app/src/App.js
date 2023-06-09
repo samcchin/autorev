@@ -130,6 +130,7 @@ function App() {
     getTechnicians();
     getAppointments();
   }, []);
+  
   return (
     <BrowserRouter>
       <Nav />

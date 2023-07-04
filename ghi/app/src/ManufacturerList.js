@@ -1,8 +1,11 @@
+import ".//index.css"
+
+
 function ManufacturerList({manufacturers}){
     return(
-        <>
+        <div className="list-page">
             <h1>Manufacturers</h1>
-            <table className="table table-striped table-hover">
+            <table className='table'>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -18,7 +21,7 @@ function ManufacturerList({manufacturers}){
                     })}
                 </tbody>
             </table>
-        </>
+        </div>
     );
 }
 export default ManufacturerList;

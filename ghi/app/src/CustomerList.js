@@ -2,7 +2,7 @@ function CustomersList({customers}) {
     return(
         <>
             <h1>Customers</h1>
-            <table className='table table-striped table-hover'>
+            <table className='table'>
                 <thead>
                     <tr>
                         <th>First Name</th>

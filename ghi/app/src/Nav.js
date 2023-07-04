@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import AutoRevLogo from './/assets/images/autorev_logo.png'
 
 function Nav() {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container-fluid">
-    <NavLink className="navbar-brand" to="/">AutoRev</NavLink>
+    <NavLink className="navbar-brand" to="/"><img src={AutoRevLogo} alt="" className="logo_nav"/></NavLink>
       <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-auto-close="true" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -23,7 +24,7 @@ function Nav() {
             </ul>
           </li>
           <li className="nav-item dropdown">
-            <NavLink className="nav-link dropdown-toggle" to="/" id="navbarDarkDropdownModelsLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <NavLink className="nav-link dropdown-toggle" to="/" id="navbarDarkDropdownSalesLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Sales</NavLink>
             <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownModelsLink">
               <li><NavLink className="dropdown-item" to="/sales/new">Create a Sale</NavLink></li>
@@ -34,7 +35,7 @@ function Nav() {
             </ul>
           </li>
           <li className="nav-item dropdown">
-            <NavLink className="nav-link dropdown-toggle" to="/" id="navbarDarkDropdownAutomobileLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <NavLink className="nav-link dropdown-toggle" to="/" id="navbarDarkDropdownServicesLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Services</NavLink>
             <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownAutomobileLink">
               <li><NavLink className="dropdown-item" to="/appointments/new">Create a Service Appointment</NavLink></li>
@@ -44,7 +45,7 @@ function Nav() {
             </ul>
           </li>
           <li className="nav-item dropdown">
-            <NavLink className="nav-link dropdown-toggle" to="/" id="navbarDarkDropdownSalespersonLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <NavLink className="nav-link dropdown-toggle" to="/" id="navbarDarkDropdownEmployeesLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Employees</NavLink>
             <ul className="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownSalespersonLink">
               <li><NavLink className="dropdown-item" to="/customers/new">Create a Customer</NavLink></li>

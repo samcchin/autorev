@@ -2,7 +2,7 @@ function AutomobileList({automobiles}){
   return (
     <>
       <h1>Automobiles</h1>
-      <table className="table table-striped">
+      <table className='table'>
         <thead>
           <tr>
             <th>VIN</th>

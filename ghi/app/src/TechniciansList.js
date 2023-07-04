@@ -6,7 +6,7 @@ function TechniciansList(props){
     return(
     <div>
         <h1>Technicians</h1>
-        <table className="table table-striped table-hover">
+        <table className='table'>
             <thead>
                 <tr>
                 <th>Employee ID</th>

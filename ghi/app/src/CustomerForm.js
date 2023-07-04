@@ -67,7 +67,7 @@ function CustomerForm({getCustomers}) {
                                 name="first_name"
                                 id="first_name"
                                 className="form-control" />
-                                <label htmlFor="first_name"> First name... </label>
+                                <label htmlFor="first_name"> First Name </label>
                             </div>
                             <div className ="form-floating mb-3">
                                 <input onChange={handleLastNameChange}
@@ -77,7 +77,7 @@ function CustomerForm({getCustomers}) {
                                 name="last_name"
                                 id="last_name"
                                 className="form-control" />
-                                <label htmlFor="last_name"> Last name... </label>
+                                <label htmlFor="last_name"> Last Name </label>
                             </div>
                             <div className ="form-floating mb-3">
                                 <input onChange={handleAddressChange}
@@ -87,7 +87,7 @@ function CustomerForm({getCustomers}) {
                                     id="address"
                                     className="form-control"
                                 />
-                                <label htmlFor="address"> Address... </label>
+                                <label htmlFor="address"> Address </label>
                             </div>
                             <div className ="form-floating mb-3">
                                 <input onChange={handlePhoneNumberChange}
@@ -99,7 +99,7 @@ function CustomerForm({getCustomers}) {
                                 />
                                 <label htmlFor="phone_number"> Phone Number (XXX)-XXX-XXXX </label>
                             </div>
-                            <button type="submit" className="btn btn-outline-primary">Create</button>
+                            <button type="submit" className="btn btn-primary">Create</button>
                         </form>
                     </div>
                 </div>

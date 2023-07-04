@@ -43,7 +43,7 @@ function ServiceHistory({appointments, automobiles}){
       />
       <button type="submit" className="btn-primary btn-search">Search</button>
       </form>
-      <table className="table table-striped table-hover">
+      <table className="table">
         <thead>
           <tr>
             <th>VIN</th>
@@ -64,7 +64,7 @@ function ServiceHistory({appointments, automobiles}){
                 hour: 'numeric',
                 minute: 'numeric',
                 hour12: true,
-                timeZone: "America/Los_Angeles"
+                timeZone: 'America/Los_Angeles'
               });
             return (
               <tr key={appointment.id}>

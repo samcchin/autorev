@@ -60,7 +60,7 @@ function SalespersonForm({getSalespeople}) {
                             name="first_name"
                             id="first_name"
                             className="form-control" />
-                            <label htmlFor="first_name"> First name... </label>
+                            <label htmlFor="first_name"> First Name </label>
                         </div>
                         <div className ="form-floating mb-3">
                             <input onChange={handleLastNameChange}
@@ -71,7 +71,7 @@ function SalespersonForm({getSalespeople}) {
                             name="last_name"
                             id="last_name"
                             className="form-control" />
-                            <label htmlFor="last_name"> Last name... </label>
+                            <label htmlFor="last_name"> Last Name </label>
                         </div>
                         <div className ="form-floating mb-3">
                             <input onChange={handleEmployeeIdChange}
@@ -84,9 +84,9 @@ function SalespersonForm({getSalespeople}) {
 
                                 className="form-control"
                             />
-                            <label htmlFor="employee_id"> Employee ID... </label>
+                            <label htmlFor="employee_id"> Employee ID </label>
                         </div>
-                        <button type="submit" className="btn btn-outline-primary">Create</button>
+                        <button type="submit" className="btn btn-primary">Create</button>
                     </form>
                 </div>
             </div>

@@ -45,7 +45,7 @@ function ServiceAppointmentList({appointments, automobiles, getAppointments}){
     return (
       <>
         <h1>Service Appointments</h1>
-        <table className="table table-striped table-hover">
+        <table className='table'>
           <thead>
             <tr>
               <th>VIN</th>

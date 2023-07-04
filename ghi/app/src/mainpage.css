@@ -1,0 +1,57 @@
+body {
+    background: url(".//assets/images/background-image.jpg") no-repeat center center fixed;
+    background-size: cover;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color:black;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+      monospace;
+  }
+
+  .logo_nav{
+    height:10px;
+  }
+
+  .autorev_logo {
+    width:fit-content;
+    height:80px;
+  }
+
+  .caption {
+    padding: 15px;
+    color: white;
+  }
+
+.book-appt-btn{
+    color: white;
+    text-decoration: none;
+    height:50px
+}
+
+.book-appt-btn:hover{
+    color: white;
+    text-decoration: none;
+}
+
+.appt-button {
+    display:flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content:center;
+}
+
+.shadow {
+    background-color: rgba(255, 255, 255, 0.213);
+}
+
+
+table {
+    background-color:rgba(255, 255, 255, 0.151);
+}

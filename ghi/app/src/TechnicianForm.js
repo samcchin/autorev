@@ -69,7 +69,7 @@ function TechnicianForm(models){
                   placeholder="Last name"
                   required value ={lastName}
                   type="text" name="last_name" id="last_name" className="form-control"/>
-                  <label htmlFor="last_name">Last name</label>
+                  <label htmlFor="last_name">Last Name</label>
                 </div>
                 <div className="form-floating mb-3">
                    <input

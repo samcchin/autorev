@@ -82,7 +82,7 @@ function ServiceAppointmentForm(){
 
     return (
         <>
-        <div className="row">
+        <div className="form-row">
         <div className="offset-3 col-6">
           <div className="shadow p-4 mt-4">
             <h1>Create an appointment</h1>

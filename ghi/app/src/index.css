@@ -12,3 +12,40 @@ code {
     monospace;
 }
 
+.logo_nav{
+  height:10px;
+}
+
+.autorev_logo {
+  width:fit-content;
+  height:80px;
+}
+
+.caption {
+  padding: 15px;
+  color: white;
+}
+
+table, thead, th, tr, tbody, td, h1
+{
+  color:white;
+}
+
+table {
+  margin-left: auto;
+  margin-right:auto;
+}
+
+.list-page {
+  padding-top: 10px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  align-self: center;
+}
+
+.table-hover{
+  color:white
+}
+
+

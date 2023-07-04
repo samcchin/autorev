@@ -2,7 +2,7 @@ function SalesList({sales}){
     return (
         <>
             <h1>Sales</h1>
-            <table className="table table-striped">
+            <table className='table'>
                 <thead>
                     <tr>
                         <th>Sales Person Name</th>

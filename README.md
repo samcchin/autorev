@@ -1,5 +1,5 @@
-# CarCar
-CarCar is an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales. The service center and sales are microservices of the application, and both utilize a poller to integrate with other services. The Service API handles the automobile service appointments and Sales API handles the sales information.
+# AutoRev
+AutoRev is an application for managing aspects of an automobile dealership—specifically its inventory, service center, and sales. The service center and sales are microservices of the application, and both utilize a poller to integrate with other services. The Service API handles the automobile service appointments and Sales API handles the sales information.
 
 Team:
 * Benjamin Ostler - Sales microservice
@@ -8,7 +8,7 @@ Team:
 
 ## Design
 
-![Project Beta Diagram](/assets/images/projectbetadiagram.png "Project Beta Diagram of Front End and Back End")
+![AutoRev Diagram](/assets/images/projectbetadiagram.png "AutoRev Diagram of Front End and Back End")
 [Excalidraw Diagram](https://excalidraw.com/#json=liX7w-KNOHZDifpUVH1j_,TO2QvmVIfyR0yuQZ-AmekQ)
 
 
@@ -290,7 +290,7 @@ This microservice includes three models, which are listed below.
 
 
 #### Technicians
-A Technician is defined as an employee of CarCar that is assigned to an appointment to service a car.
+A Technician is defined as an employee of AutoRev that is assigned to an appointment to service a car.
 
 
 **APIs to send and view data**

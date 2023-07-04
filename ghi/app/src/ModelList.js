@@ -16,7 +16,7 @@ function ModelList({models}){
               <tr key={model.id}>
                 <td>{model.name}</td>
                 <td>{model.manufacturer.name}</td>
-                <td><img alt="" height="100" width="100" src={model.picture_url}/> </td>
+                <td><img alt="" height="100" src={model.picture_url}/> </td>
               </tr>
             );
           })}

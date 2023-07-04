@@ -29,6 +29,7 @@ function SalespersonForm({getSalespeople}) {
             setLastName('');
             setFirstName('');
             setEmployeeId('');
+            window.location.reload()
         }
     }
 
@@ -76,9 +77,11 @@ function SalespersonForm({getSalespeople}) {
                             <input onChange={handleEmployeeIdChange}
                                 placeholder="Employee ID"
                                 required
+                                value={employee_id}
                                 type="text"
                                 name="employee_id"
                                 id="employee_id"
+
                                 className="form-control"
                             />
                             <label htmlFor="employee_id"> Employee ID... </label>

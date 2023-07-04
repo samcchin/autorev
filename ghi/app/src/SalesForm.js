@@ -18,7 +18,6 @@ function SalesForm() {
         data.customer = customer;
         data.salesperson = salesPerson;
 
-        console.log("data dictionary before fetch: ", data);
         const salesUrl = 'http://localhost:8090/api/sales/';
         const fetchConfig = {
             method: "post",
@@ -27,11 +26,24 @@ function SalesForm() {
                 'Content-Type': 'application/json',
             },
         };
+
+        const autoUrl = `http://localhost:8100/api/automobiles/${autovin}/`
+        const putConfig = {
+            method: "put",
+            body: JSON.stringify({sold: true}),
+            headers: {
+              'Content-Type':'application/json',
+            }
+          };
+        const auto_response = await fetch(autoUrl, putConfig);
+
         const response = await fetch(salesUrl, fetchConfig);
-        console.log("Sales Response after fetch: ", response);
-        if (response.ok) {
+        if (response.ok && auto_response.ok) {
             const newSale = await response.json();
-            console.log("Await Response.json() returns newSale: ", newSale)
+            console.log(newSale);
+
+            const updated_auto = await auto_response.json();
+            console.log(updated_auto)
 
             setAutovin('');
             setPrice('');
@@ -128,7 +140,7 @@ function SalesForm() {
                                     <option value="">Choose a salesperson</option>
                                     {salesPeople?.map(salesperson => {
                                         return (
-                                            <option key={salesperson.employee_id} value={salesperson.employee_id}>
+                                            <option key={salesperson.employee_id} value={salesperson.id}>
                                                 {salesperson.first_name} {salesperson.last_name}
                                             </option>
                                         );

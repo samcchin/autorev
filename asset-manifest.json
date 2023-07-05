@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/autorev/static/css/main.fe3807a1.css",
+    "main.js": "/autorev/static/js/main.d96acac1.js",
+    "static/media/autorev_logo.png": "/autorev/static/media/autorev_logo.e8e0f8dae32932221486.png",
+    "static/media/background-image.jpg": "/autorev/static/media/background-image.eb0c25286b25f238b2d8.jpg",
+    "index.html": "/autorev/index.html",
+    "main.fe3807a1.css.map": "/autorev/static/css/main.fe3807a1.css.map",
+    "main.d96acac1.js.map": "/autorev/static/js/main.d96acac1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fe3807a1.css",
+    "static/js/main.d96acac1.js"
+  ]
+}
